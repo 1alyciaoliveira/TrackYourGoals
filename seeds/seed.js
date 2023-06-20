@@ -15,7 +15,8 @@ const seedDatabase = async () => {
 
     const objective = await Objective.bulkCreate(objectiveData);
 
-    const transaction = await Objective.bulkCreate(transactionData);
+    const transaction = await Transaction.bulkCreate(transactionData);
 
     process.exit(0);
 };
+seedDatabase();

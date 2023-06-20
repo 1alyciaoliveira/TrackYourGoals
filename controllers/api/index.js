@@ -11,8 +11,8 @@ const userRoutes = require('./userRoutes');
 const objectiveRoutes = require('./objectiveRoutes');
 const transactionsRoutes = require('./transactionsRoutes');
 
-router.use('/users', userRoutes);
-router.use('/objectives', objectiveRoutes);
-router.use('/transactions', transactionsRoutes);
+router.use('/user', userRoutes);
+router.use('/objective', objectiveRoutes);
+router.use('/transaction', transactionsRoutes);
 
 module.exports = router;

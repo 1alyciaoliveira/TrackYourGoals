@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User , Transaction, Objective } = require('../Models');
 
+<<<<<<< HEAD
 router.get('/', async (req, res) => {
     try {
       // Get all projects and JOIN with user data
@@ -58,4 +59,6 @@ router.get('/', async (req, res) => {
     });
   
 
+=======
+>>>>>>> ee61996 (UserRoutes)
 module.exports = router;

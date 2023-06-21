@@ -24,7 +24,38 @@ router.get('/', async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+});
+    //get login page
+
+    router.get('/login', (req, res) => {
+        res.render('login');
+    });
+    
+    //get register page
+    router.get('/register', (req, res) => {
+        res.render('singup');
+    });
+    
+    //get new goal page
+    router.get('/newgoal', (req, res) => {
+        res.render('singup');
+    });
+    
+    //get edit goal page
+    router.get('/editgoal', (req, res) => {
+        res.render('edit');
+    });
+    
+    //get goal page
+    router.get('/goal', (req, res) => {
+        res.render('goal');
+    });
+
+    //get profile page
+
+    router.get('/profile', (req, res) => {
+        res.render('profile');
+    });
   
 
 module.exports = router;

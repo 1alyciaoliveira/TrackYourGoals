@@ -13,8 +13,6 @@ router.get('/user', async (req, res) => {
     }
 });
 
-
-<<<<<<< HEAD
 router.get('/', async (req, res) => {
     try {
       // Get all projects and JOIN with user data
@@ -72,6 +70,4 @@ router.get('/', async (req, res) => {
     });
   
 
-=======
->>>>>>> ee61996 (UserRoutes)
 module.exports = router;

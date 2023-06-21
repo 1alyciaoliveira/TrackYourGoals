@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
       const objectives = objectiveData.map((objective) => objective.get({ plain: true }));
   
       // Pass serialized data and session flag into template
-      res.render('singup', { //edit 'homepage' to the page you wanna render
+      res.render('login', { //edit 'homepage' to the page you wanna render
         objectives, 
         logged_in: req.session.logged_in 
       });
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
     
     //get new goal page
     router.get('/newgoal', (req, res) => {
-        res.render('singup');
+        res.render('new');
     });
     
     //get edit goal page

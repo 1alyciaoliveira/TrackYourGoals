@@ -4,14 +4,21 @@
         "name": "Nintendo Switch",
         "target_quantity": 5000,
         "image_path": "path/to/switch.jpg",
-        "description": "Quiero comprar un Nintendo Switch"
+        "description": "I want a Nintendo Switch"
     },
     {
         "user_id": 1,
-        "name": "Unos tenis nuevos",
+        "name": "Tennis",
         "target_quantity": 2000,
         "image_path": "path/to/tenis.jpg",
-        "description": "Deseo adquirir unos tenis nuevos"
+        "description": "I want a new pair of tennis"
+    }, 
+    {
+        "user_id": 2,
+        "name": "Bike",
+        "target_quantity": 2000,
+        "image_path": "path/to/tenis.jpg",
+        "description": "I want a mountain bike"
     }
 ]
 

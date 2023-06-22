@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^3.7.0",
     "bcrypt": "^5.0.0",
     "bulma": "^0.9.4",
     "bulma-start": "^0.0.5",

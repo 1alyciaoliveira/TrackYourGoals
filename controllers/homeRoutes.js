@@ -111,6 +111,7 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 
   const obj = {
     ...objective_Data.get({ plain: true }),
+    logged_in: req.session.logged_in
   };
 
   const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);

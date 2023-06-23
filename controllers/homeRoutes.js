@@ -84,7 +84,7 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 //get register page
 router.get('/register', (req, res) => {
-  res.render('singup');
+  res.render('signup');
 });
 
 //get new goal page

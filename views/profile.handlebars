@@ -1,44 +1,32 @@
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-start">
-            <a class="navbar-item">
-              Money Save: User
-            </a> 
-        </div>     
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button has-text-black" id="discover">
-                    <strong>Total</strong>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-start">
+    <a class="navbar-item">
+      Money Save: {{name}}
+    </a>
+  </div>
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <div class="buttons">
+        <a class="button has-text-black" id="discover">
+          <strong>Total</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+</nav>
 
-        <table class="table is-fullwidth">
-            <thead>
-              <tr>
-                <th>Objective</th>
-                <th>Progress</th>
-                <th>Total $</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Zapatos</th>
-                <td><progress class="progress is-link" value="30" max="100">30%</progress></td>
-                <td>$100</td>
-              </tr>
-              <tr>
-                <th>Bike</th>
-                <td><progress class="progress is-link" value="70" max="100">70%</progress></td>
-                <td>$300</td>
-              </tr>
-              <tr>
-                <th>Boletos</th>
-                <td><progress class="progress is-link" value="10" max="100">10%</progress></td>
-                <td>$50</td>
-              </tr>
-            </tbody>
-          </table>
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Objective</th>
+      <th>Progress</th>
+      <th>Total $</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each objectives}}
+    {{> objectivesitems}}
+    {{/each}}
+  </tbody>
+</table>

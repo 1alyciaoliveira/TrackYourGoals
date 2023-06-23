@@ -117,6 +117,11 @@ router.get('/goal/:id', withAuth, async (req, res) => {
   const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);
   obj.progress = progress;
 
+  obj.transactions.forEach(ob =>{
+    ob.positive = (ob.quantity>0)? true: false;
+
+  });
+
   console.log(obj);
 
   res.render('goal', obj);

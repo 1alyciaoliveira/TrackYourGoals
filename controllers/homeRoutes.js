@@ -122,8 +122,6 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 
   });
 
-  console.log(obj);
-
   res.render('goal', obj);
 });
 

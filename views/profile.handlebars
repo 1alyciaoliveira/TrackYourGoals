@@ -30,3 +30,76 @@
     {{/each}}
   </tbody>
 </table>
+
+<div class="modal" id="modal1">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		 <div class="field mr-3 ml-3 mt-3 label"> New Objective</div>
+
+  <div class="field mr-3 ml-3">
+    <label class="label">Objective</label>
+    <div class="control">
+      <input id="objective" class="input" type="text" placeholder="">
+    </div>
+  </div>
+  
+  <div class="field mr-3 ml-3">
+    <label class="label">Amount to save ($)</label>
+    <div class="control has-icons-left has-icons-right">
+      <input id="target-quantity" class="input is-success" type="text" placeholder="Text input" value="$">
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+  
+  <div class="field mr-3 ml-3">
+    <label class="label">Time Target (# of weeks)</label>
+    <div class="control">
+      <div class="select" id="time-target">
+        <select>
+          <option>Select dropdown</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  <div class="field mr-3 ml-3">
+    <label class="label">Description</label>
+    <div class="control">
+      <textarea id="description" class="textarea" placeholder="Textarea"></textarea>
+    </div>
+  </div>
+  
+  <div class="field is-grouped mr-3 ml-3">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+		<footer class="modal-card-foot">
+			<button class="button is-danger">
+				Cancel
+			</button>
+		</footer>
+	</div>
+</div>
+
+<button onclick="openModal();" class="button is-success">
+Open Modal
+</button>
+
+
+
+<script src="./js/objectives.js"></script>

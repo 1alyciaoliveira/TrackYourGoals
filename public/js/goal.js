@@ -218,27 +218,36 @@ document.querySelector('#erase-goal').addEventListener('click', delButtonHandler
  */
 document.addEventListener('DOMContentLoaded', function() {
   const ctx = document.getElementById('transactionChart').getContext('2d');
-
-  // Realizar la solicitud GET a la API
-  fetch('/api/transaction')
+  const goalId = window.location.toString().split('/')[
+    window.location.toString().split('/').length - 1
+  ];
+  fetch(`/api/transaction/goal/${goalId}`)
     .then(response => response.json())
     .then(data => {
-      const transactionQuantities = data.transactionQuantities; // Obtener los datos de las transacciones
+      const transactionQuantities = data.transactionQuantities; 
+      const barColors = transactionQuantities.map(value => value >= 0 ? '#70e08e' : '#f55d6c'); 
 
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels:  transactionQuantities, 
           datasets: [{
             label: 'Quantity',
             data: transactionQuantities,
+            backgroundColor: barColors, 
             borderWidth: 1
           }]
         },
         options: {
           scales: {
             y: {
+              
               beginAtZero: true
+            },
+            x: {
+              grid:{
+                display: false 
+              }
             }
           }
         }
@@ -248,4 +257,3 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(error);
     });
 });
-

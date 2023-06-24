@@ -55,9 +55,30 @@ const newFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to create project');
+      alert('Failed to create this objective');
     }
   }
 };
 
 document.querySelector('#modal1').addEventListener('click', newFormHandler);
+
+const delButtonHandler = async (event) => {
+  if (event.target.hasAttribute('data-id')) {
+    const id = event.target.getAttribute('data-id');
+
+    const response = await fetch(`/api/objective/${id}`, {
+      method: 'DELETE',
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert('Objective deleted');
+      document.location.replace('/profile');
+    } else {
+      alert(data.message || 'Failed to delete objective');
+    }
+  }
+};
+
+document.querySelector('#table').addEventListener('click', delButtonHandler);

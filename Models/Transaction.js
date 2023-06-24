@@ -27,7 +27,7 @@ Transaction.init(
         },
         quantity: {
             type: DataTypes.INTEGER,
-            allowNull:false
+            allowNull:true // changed to true so it can accept negative values
         },
         type: {
             type: DataTypes.TINYINT,

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Objective } = require('../../Models');
 
+// POST ROUTE
 router.post('/', async (req, res) => {
     try {
         const objectiveData = await Objective.create({
@@ -12,21 +13,30 @@ router.post('/', async (req, res) => {
         res.status(400).json(err);
     }
 });
+
+// PUT ROUTE
 router.put('/:id', async (req, res) => {
     try {
         const objectiveData = await Objective.update(
             req.body, { where: { id: req.params.id, user_id: req.session.user_id } }
         );
-        !objectiveData[0] ? res.status(404).json({ message: 'Objective not found' }) : res.status(200).json(objectiveData);
+
+        if (!objectiveData) {
+            return res.status(404).json({ message: 'Objective not found' });
+        }
+            res.status(200).json(objectiveData);
     } catch (err) {
         res.status(400).json(err);
     }
 });
+
+// DELETE ROUTE
 router.delete('/:id', async (req, res) => {
     try {
         const objectiveData = await Objective.destroy( { where: { id: req.params.id, user_id: req.session.user_id } }
         );
-        !objectiveData[0] ? res.status(404).json({ message: 'Objective not found' }) : res.status(200).json(objectiveData);
+
+        res.status(200).json(objectiveData);
     } catch (err) {
         res.status(500).json(err);
     }

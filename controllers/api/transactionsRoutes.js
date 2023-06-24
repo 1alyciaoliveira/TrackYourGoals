@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const { Transaction } = require('../../Models');
+const withAuth = require('../../utils/auth');
 
 
 // POST ROUTE - mandatory to have the id in the url
-router.post('/:id', async (req, res) => {
+router.post('/:id', withAuth, async (req, res) => {
     try {
         console.log(req.body);
         const transactionData = await Transaction.create(
@@ -24,7 +25,7 @@ router.post('/:id', async (req, res) => {
 });
 
 // PUT ROUTE
-router.put('/:id', async (req, res) => {
+router.put('/:id',withAuth, async (req, res) => {
     try {
         const transactionData = await Transaction.update(
 
@@ -41,7 +42,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE ROUTE
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',withAuth, async (req, res) => {
     try {
         const transactionData = await Transaction.destroy(
             {

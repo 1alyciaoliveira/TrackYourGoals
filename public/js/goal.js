@@ -42,9 +42,14 @@ const newFormHandler = async (event) => {
   const name = document.querySelector('#objective').value.trim();
   const target_quantity = document.querySelector('#target-quantity').value.trim();
   const description = document.querySelector('#description').value.trim();
+  
+  const id = window.location.toString().split('/')[
+    window.location.toString().split('/').length - 1
+  ];
 
+  
   if (name && target_quantity && description) {
-    const response = await fetch(`/api/objective`, {
+    const response = await fetch(`/api/objective/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ name, target_quantity, description }),
       headers: {
@@ -53,14 +58,15 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/goal');
+      alert('Objective updated');
+      document.location.replace(`/goal/${id}`);
     } else {
-      alert('Failed to create project');
+      alert(data.message ||'Failed to edit objective');
     }
   }
 };
 
-document.querySelector('#modal1').addEventListener('click', newFormHandler);
+document.querySelector('#submit-btn').addEventListener('click', newFormHandler);
 
 // Create add money 
 

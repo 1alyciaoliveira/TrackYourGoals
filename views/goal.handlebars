@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="section">
   <h1 class="title has-text-centered">{{name}}</h1>
   <div class="columns">
@@ -16,6 +17,7 @@
             {{#each transactions}}
             {{> transactionhistory}}
             {{/each}}
+
           </tbody>
         </table>
       </div>
@@ -23,7 +25,9 @@
     <div class="column">
       <div class="box">
         <h2 class="title">Pie Chart</h2>
+
         <p>You have saved ${{progress}} from your ${{target_quantity}} goal.</p>
+
         <figure class="image is-128x128">
           <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
         </figure>
@@ -36,6 +40,9 @@
     <div class="column">
       <div class="box">
         <h2 class="title">Transaction Chart</h2>
+
+        <canvas id="transactionChart"></canvas>
+
       </div>
     </div>
 

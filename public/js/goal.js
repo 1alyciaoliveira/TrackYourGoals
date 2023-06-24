@@ -67,3 +67,33 @@ document.querySelector('#modal1').addEventListener('click', newFormHandler);
 // Create Remove money
 
 // Create Delete Goal
+
+
+
+// Chart display and functionallity
+document.addEventListener('DOMContentLoaded', function() {
+  const ctx = document.getElementById('transactionChart').getContext('2d');
+  
+  // Datos de ejemplo de las cantidades de transacciones
+  const transactionQuantities = [12, 19, 3, 5, 2, 3];
+  
+  // Crea una nueva instancia de Chart.js
+  new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: 'Quantity',
+              data: transactionQuantities,
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+});

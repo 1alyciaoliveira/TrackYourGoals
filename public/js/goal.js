@@ -98,7 +98,7 @@ const addMoneyHandler = async (event) => {
   event.preventDefault();
 
   const quantity = document.querySelector('#quantity').value.trim();
-  const description = document.querySelector('#description').value.trim();
+  const description = document.querySelector('#add_description').value.trim();
   
   console.log(description);
 

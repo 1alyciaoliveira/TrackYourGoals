@@ -133,7 +133,7 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 });
 
 
-router.get('/api/transactions', withAuth, async (req, res) => {
+router.get('/api/transaction', withAuth, async (req, res) => {
   try {
     const user_id = req.session.user_id;
     const userData = await User.findByPk(user_id, {

@@ -30,9 +30,6 @@ router.delete('/:id', async (req, res) => {
     try {
         const objectiveData = await Objective.destroy( { where: { id: req.params.id, user_id: req.session.user_id } }
         );
-        if (!objectiveData) {
-            return res.status(404).json({ message: 'Objective not found' });
-        }
 
         res.status(200).json(objectiveData);
     } catch (err) {

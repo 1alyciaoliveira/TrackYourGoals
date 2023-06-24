@@ -53,13 +53,19 @@ router.get('/profile', withAuth, async (req, res) => {
       logged_in: req.session.logged_in
     };
 
+    let total_target_sum = 0;
+    let total_ongoing_sum = 0;
     obj.objectives.forEach(obj => {
+      total_target_sum = total_target_sum + obj.target_quantity;
       const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);
       const progressPercent = (progress / obj.target_quantity) * 100;
-      obj.progress = progress;
+      
+      total_ongoing_sum = total_ongoing_sum + progress;
       obj.progress = progressPercent;
     });
-
+    
+    obj.total_target_sum = total_target_sum;
+    obj.total_ongoing_sum =total_ongoing_sum;
 
     console.log(obj.objectives);
 

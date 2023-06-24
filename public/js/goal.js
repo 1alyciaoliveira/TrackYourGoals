@@ -1,63 +1,63 @@
 // Function to open the modal
 function openModal1() {
-	
-	// Add is-active class on the modal
-	document.getElementById("modal1").classList.add("is-active");
+
+  // Add is-active class on the modal
+  document.getElementById("modal1").classList.add("is-active");
 }
-	
+
 // Function to close the modal
 function closeModal1() {
-	document.getElementById("modal1").classList.remove("is-active");
+  document.getElementById("modal1").classList.remove("is-active");
 }
 
 // Function to open the modal
 function openModal2() {
-	
-	// Add is-active class on the modal
-	document.getElementById("modal2").classList.add("is-active");
+
+  // Add is-active class on the modal
+  document.getElementById("modal2").classList.add("is-active");
 }
-	
+
 // Function to close the modal
 function closeModal2() {
-	document.getElementById("modal2").classList.remove("is-active");
+  document.getElementById("modal2").classList.remove("is-active");
 }
 
 // Function to open the modal
 function openModal3() {
-	
-	// Add is-active class on the modal
-	document.getElementById("modal3").classList.add("is-active");
+
+  // Add is-active class on the modal
+  document.getElementById("modal3").classList.add("is-active");
 }
-	
+
 // Function to close the modal
 function closeModal3() {
-	document.getElementById("modal3").classList.remove("is-active");
+  document.getElementById("modal3").classList.remove("is-active");
 }
 
 // Add event listeners to close the modal
 // whenever user click outside modal
 document.querySelectorAll(
-	".modal-background"
+  ".modal-background"
 ).forEach(($el) => {
-			const $modal = $el.closest(".modal");
-			$el.addEventListener("click", () => {
-			
-			// Remove the is-active class from the modal
-			$modal.classList.remove("is-active");
-		});
-		});
+  const $modal = $el.closest(".modal");
+  $el.addEventListener("click", () => {
 
-        /*
-		
-		// Adding keyboard event listeners to close the modal
-		document.addEventListener("keydown", (event) => {
-		const e = event || window.event;
-			if (e.keyCode === 27) {
-			
-			// Using escape key
-			closeModal();
-			}
-		});
+    // Remove the is-active class from the modal
+    $modal.classList.remove("is-active");
+  });
+});
+
+/*
+	
+// Adding keyboard event listeners to close the modal
+document.addEventListener("keydown", (event) => {
+const e = event || window.event;
+if (e.keyCode === 27) {
+	
+// Using escape key
+closeModal();
+}
+});
 */
 
 const editHandler = async (event) => {
@@ -66,12 +66,12 @@ const editHandler = async (event) => {
   const name = document.querySelector('#objective').value.trim();
   const target_quantity = document.querySelector('#target-quantity').value.trim();
   const description = document.querySelector('#description').value.trim();
-  
+
   const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
   ];
 
-  
+
   if (name && target_quantity && description) {
     const response = await fetch(`/api/objective/${id}`, {
       method: 'PUT',
@@ -85,7 +85,7 @@ const editHandler = async (event) => {
       alert('Objective updated');
       document.location.replace(`/goal/${id}`);
     } else {
-      alert(data.message ||'Failed to edit objective');
+      alert(data.message || 'Failed to edit objective');
     }
   }
 };
@@ -98,30 +98,32 @@ const addMoneyHandler = async (event) => {
   event.preventDefault();
 
   const quantity = document.querySelector('#quantity').value.trim();
-  const description = document.querySelector('#description').value.trim();
-  const type = 1;
+  const description = document.querySelector('#add_description').value.trim();
+  
+  console.log(description);
+
   const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
   ];
 
 
-      const response = await fetch(`/api/transaction/${id}`, {
-      method: 'POST',
-      body: JSON.stringify({ quantity, description, type }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`/api/transaction/${id}`, {
+    method: 'POST',
+    body: JSON.stringify({ quantity, description}),
+    headers: {
+      'Content-Type': 'application/json',
+    },
 
-    });
+  });
 
 
-    if (response.ok) {
-      alert('Money added');
-      document.location.replace(`/goal/${id}`);
-    } else {
-      alert(response.message ||'Failed to add money');
-    }
+  if (response.ok) {
+    alert('Money added');
+    document.location.replace(`/goal/${id}`);
+  } else {
+    alert(response.message || 'Failed to add money');
   }
+}
 
 
 document.querySelector('#add-submit-btn').addEventListener('click', addMoneyHandler);
@@ -133,33 +135,34 @@ const removeMoneyHandler = async (event) => {
   event.preventDefault();
 
   const removeQuantity = document.querySelector('#remove-quantity');
-    const negativeQuantity = parseFloat(removeQuantity.value.trim());
-    const quantity = -1 * negativeQuantity;
-    const description = document.querySelector('#description').value.trim();
+  const negativeQuantity = parseFloat(removeQuantity.value.trim());
+  const quantity = -1 * negativeQuantity;
+  const description = document.querySelector('#description').value.trim();
 
-  const type = 0;
+  console.log(description);
+
   const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
   ];
 
 
-      const response = await fetch(`/api/transaction/${id}`, {
-      method: 'POST',
-      body: JSON.stringify({ quantity, description, type }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`/api/transaction/${id}`, {
+    method: 'POST',
+    body: JSON.stringify({ quantity, description}),
+    headers: {
+      'Content-Type': 'application/json',
+    },
 
-    });
+  });
 
 
-    if (response.ok) {
-      alert('Money removed');
-      document.location.replace(`/goal/${id}`);
-    } else {
-      alert(response.message ||'Failed to remove money');
-    }
+  if (response.ok) {
+    alert('Money removed');
+    document.location.replace(`/goal/${id}`);
+  } else {
+    alert(response.message || 'Failed to remove money');
   }
+}
 
 
 document.querySelector('#remove-submit-btn').addEventListener('click', removeMoneyHandler);
@@ -174,25 +177,25 @@ const delButtonHandler = async (event) => {
     window.location.toString().split('/').length - 1
   ];
 
-    const response = await fetch(`/api/objective/${id}`, {
-      method: 'DELETE',
-    });
+  const response = await fetch(`/api/objective/${id}`, {
+    method: 'DELETE',
+  });
 
 
-    if (response.ok) {
-      alert('Objective deleted');
-      document.location.replace('/profile');
-    } else {
-      const data = await response.json();
-      alert(data.message || 'Failed to delete objective');
-    }
-  };
+  if (response.ok) {
+    alert('Objective deleted');
+    document.location.replace('/profile');
+  } else {
+    const data = await response.json();
+    alert(data.message || 'Failed to delete objective');
+  }
+};
 
 document.querySelector('#erase-goal').addEventListener('click', delButtonHandler);
 
 
 // Chart display and functionallity
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const ctx = document.getElementById('transactionChart').getContext('2d');
   const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
@@ -200,29 +203,29 @@ document.addEventListener('DOMContentLoaded', function() {
   fetch(`/transaction/goal/${id}`)
     .then(response => response.json())
     .then(data => {
-      const transactionQuantities = data.transactionQuantities; 
-      const barColors = transactionQuantities.map(value => value >= 0 ? '#70e08e' : '#f55d6c'); 
+      const transactionQuantities = data.transactionQuantities;
+      const barColors = transactionQuantities.map(value => value >= 0 ? '#70e08e' : '#f55d6c');
 
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels:  transactionQuantities, 
+          labels: transactionQuantities,
           datasets: [{
             label: 'Quantity',
             data: transactionQuantities,
-            backgroundColor: barColors, 
+            backgroundColor: barColors,
             borderWidth: 1
           }]
         },
         options: {
           scales: {
             y: {
-              
+
               beginAtZero: true
             },
             x: {
-              grid:{
-                display: false 
+              grid: {
+                display: false
               }
             }
           }
@@ -236,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // PieChart
 
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
   const ctx = document.getElementById('pieChart').getContext('2d');
   const goalId = window.location.toString().split('/').pop();
 
@@ -245,7 +248,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const data = await response.json();
 
     const transactionTotal = data.transactionQuantities.reduce((total, quantity) => total + quantity, 0);
-    const goalTotal = data.targetQuantity; 
+    const goalTotal = data.targetQuantity;
 
     const savingsData = [transactionTotal, goalTotal];
 

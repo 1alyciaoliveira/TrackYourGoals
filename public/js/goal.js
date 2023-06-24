@@ -98,6 +98,7 @@ const addMoneyHandler = async (event) => {
   event.preventDefault();
 
   const quantity = document.querySelector('#quantity').value.trim();
+  const description = document.querySelector('#description').value.trim();
   const type = 1;
   const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
@@ -106,14 +107,13 @@ const addMoneyHandler = async (event) => {
 
       const response = await fetch(`/api/transaction/${id}`, {
       method: 'POST',
-      body: JSON.stringify({ quantity, type }),
+      body: JSON.stringify({ quantity, description, type }),
       headers: {
         'Content-Type': 'application/json',
       },
 
     });
 
-    console.log(JSON.stringify({ quantity, type }));
 
     if (response.ok) {
       alert('Money added');
@@ -133,8 +133,9 @@ const removeMoneyHandler = async (event) => {
   event.preventDefault();
 
   const removeQuantity = document.querySelector('#remove-quantity');
-  const negativeQuantity = parseFloat(removeQuantity.value.trim());
+    const negativeQuantity = parseFloat(removeQuantity.value.trim());
     const quantity = -1 * negativeQuantity;
+    const description = document.querySelector('#description').value.trim();
 
   const type = 0;
   const id = window.location.toString().split('/')[
@@ -144,14 +145,13 @@ const removeMoneyHandler = async (event) => {
 
       const response = await fetch(`/api/transaction/${id}`, {
       method: 'POST',
-      body: JSON.stringify({ quantity, type }),
+      body: JSON.stringify({ quantity, description, type }),
       headers: {
         'Content-Type': 'application/json',
       },
 
     });
 
-    console.log(JSON.stringify({ quantity, type }));
 
     if (response.ok) {
       alert('Money removed');

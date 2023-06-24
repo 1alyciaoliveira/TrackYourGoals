@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { User, Transaction, Objective } = require('../Models');
 const withAuth = require('../utils/auth');
 
+// All the GET routes
+
 router.get('/user', async (req, res) => {
   try {
     const data = await User.findAll({
@@ -27,6 +29,7 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 //get login page
 
 router.get('/login', (req, res) => {
@@ -40,7 +43,6 @@ router.get('/login', (req, res) => {
 });
 
 //get profile page
-
 router.get('/profile', withAuth, async (req, res) => {
   try {
 
@@ -82,20 +84,12 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 
 });
+
 //get register page
 router.get('/register', (req, res) => {
   res.render('signup');
 });
 
-//get new goal page
-router.get('/newgoal', (req, res) => {
-  res.render('new');
-});
-
-//get edit goal page
-router.get('/editgoal', (req, res) => {
-  res.render('edit');
-});
 
 //get goal page
 router.get('/goal', (req, res) => {
@@ -103,7 +97,7 @@ router.get('/goal', (req, res) => {
 });
 
 
-
+//get goal per id
 router.get('/goal/:id', withAuth, async (req, res) => {	
   const user_id = req.session.user_id;
   const objective_Data = await Objective.findByPk(req.params.id,	
@@ -132,7 +126,7 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 
 });
 
-
+//get transaction page
 router.get('/api/transaction', withAuth, async (req, res) => {
   try {
     const user_id = req.session.user_id;
@@ -147,7 +141,7 @@ router.get('/api/transaction', withAuth, async (req, res) => {
       ],
     });
 
-    // Obtener los resultados de las transacciones del usuario
+    // get transaction results per user
     const transactionQuantities = userData.objectives.flatMap(
       (objective) => objective.transactions.map((transaction) => transaction.quantity)
     );

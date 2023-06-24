@@ -14,8 +14,8 @@
           </thead>
           <tbody>
 
-            {{#each transactions}}	           
-            {{> transactionhistory}}	              
+            {{#each transactions}}
+            {{> transactionhistory}}
             {{/each}}
 
           </tbody>
@@ -26,10 +26,12 @@
       <div class="box">
         <h2 class="title">Pie Chart</h2>
         <p>You have saved ${{progress}} from your ${{target_quantity}} goal.</p>
-        <figure class="image is-128x128">
-          <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-        </figure>
+        <div>
+          <canvas id="pieChart"> </canvas>
+        </div>
+          
       </div>
+
     </div>
   </div>
 </div>
@@ -48,9 +50,11 @@
         <h2 class="title">Buttons</h2>
         <div class="buttons are-small">
           <button class="button" id="add-money" onclick="openModal2();" class="button is-success">Add money</button>
-          <button class="button" id="remove-money" onclick="openModal3();" class="button is-success">Remove money</button>
+          <button class="button" id="remove-money" onclick="openModal3();" class="button is-success">Remove
+            money</button>
           <button class="button" id="edit-goal" onclick="openModal1();" class="button is-success">Edit Goal</button>
-          <button class="button" id="erase-goal" onclick="delButtonHandler();" class="button is-success">Delete Goal</button>
+          <button class="button" id="erase-goal" onclick="delButtonHandler();" class="button is-success">Delete
+            Goal</button>
         </div>
       </div>
     </div>
@@ -134,13 +138,13 @@
         </div>
       </div>
 
-            <div class="field mr-3 ml-3">
+      <div class="field mr-3 ml-3">
         <label class="label">Description</label>
         <div class="control">
           <input id="description" class="input" type="text" placeholder="">
         </div>
       </div>
-     
+
       <div class="field is-grouped mr-3 ml-3">
         <div class="control">
           <button class="button is-link" id="add-submit-btn">Submit</button>
@@ -155,7 +159,7 @@
     </div>
   </div>
 
-    <div class="modal" id="modal3">
+  <div class="modal" id="modal3">
     <div class="modal-background"></div>
     <div class="modal-card">
       <div class="field mr-3 ml-3 mt-3 label">Remove money</div>
@@ -173,7 +177,7 @@
           <input id="description" class="input" type="text" placeholder="">
         </div>
       </div>
-     
+
       <div class="field is-grouped mr-3 ml-3">
         <div class="control">
           <button class="button is-link" id="remove-submit-btn">Submit</button>
@@ -190,5 +194,5 @@
 
 
 
-<script src="/js/goal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/js/goal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -126,16 +126,16 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 
 });
 
-//get transaction page
+// get transaction page
 router.get('/api/transaction/goal/:id', withAuth, async (req, res) => {
   try {
     const user_id = req.session.user_id;
-    const goal_id = req.params.id; // Obtener el ID de la meta desde los parámetros de la ruta
+    const goal_id = req.params.id; 
     const userData = await User.findByPk(user_id, {
       include: [
         {
           model: Objective,
-          where: { id: goal_id }, // Agregar una cláusula WHERE para filtrar por el ID de la meta
+          where: { id: goal_id }, 
           include: {
             model: Transaction,
           },
@@ -143,13 +143,15 @@ router.get('/api/transaction/goal/:id', withAuth, async (req, res) => {
       ],
     });
 
-    // Obtener las transacciones de la meta específica
-    const transactionQuantities = userData.objectives[0].transactions.map((transaction) => transaction.quantity);
+    const objectiveData = userData.objectives[0]; // 
+    const transactionQuantities = objectiveData.transactions.map((transaction) => transaction.quantity);
+    const targetQuantity = objectiveData.target_quantity; 
 
-    res.status(200).json({ transactionQuantities });
+    res.status(200).json({ transactionQuantities, targetQuantity });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;

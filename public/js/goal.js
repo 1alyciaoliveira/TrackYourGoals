@@ -192,36 +192,12 @@ document.querySelector('#erase-goal').addEventListener('click', delButtonHandler
 
 
 // Chart display and functionallity
-/* document.addEventListener('DOMContentLoaded', function() {
-  const ctx = document.getElementById('transactionChart').getContext('2d');
-  
-  const transactionQuantities = [12, 19, 3, 5, 2, 3];
-  new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-              label: 'Quantity',
-              data: transactionQuantities,
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
-});
- */
 document.addEventListener('DOMContentLoaded', function() {
   const ctx = document.getElementById('transactionChart').getContext('2d');
-  const goalId = window.location.toString().split('/')[
+  const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
   ];
-  fetch(`/api/transaction/goal/${goalId}`)
+  fetch(`/api/transaction/goal/${id}`)
     .then(response => response.json())
     .then(data => {
       const transactionQuantities = data.transactionQuantities; 
@@ -256,4 +232,44 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => {
       console.log(error);
     });
+});
+
+// PieChart
+
+document.addEventListener('DOMContentLoaded', async function() {
+  const ctx = document.getElementById('pieChart').getContext('2d');
+  const goalId = window.location.toString().split('/').pop();
+
+  try {
+    const response = await fetch(`/api/transaction/goal/${goalId}`);
+    const data = await response.json();
+
+    const transactionTotal = data.transactionQuantities.reduce((total, quantity) => total + quantity, 0);
+    const goalTotal = data.targetQuantity; 
+
+    const savingsData = [transactionTotal, goalTotal];
+
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Savings', 'Objective'],
+        datasets: [{
+          data: savingsData,
+          backgroundColor: ['#07b318', '#becfc0'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });

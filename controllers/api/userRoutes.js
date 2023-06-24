@@ -4,18 +4,40 @@ const { User } = require('../../Models');
 // GET ROUTE
 router.post('/', async (req, res) => {
     try {
-        const userData = await User.create(req.body);
 
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.logged_in = true;
-
-            res.status(200).json(userData);
-        });
+        
+        
+        if(!await checkUserEmail(req.body.email))
+        {
+            console.log('////////////////////')
+            const userData = await User.create(req.body);
+            
+    
+            req.session.save(() => {
+                req.session.user_id = userData.id;
+                req.session.logged_in = true;
+    
+                res.status(200).json(userData);
+            });
+        } else{
+            res.status(200).json({ message: 'Email already in use.' });    
+        }
+        
     } catch (err) {
+        console.log(err);
         res.status(400).json(err);
     }
 });
+
+async function checkUserEmail(email) {
+    try {
+      const user = await User.findOne({ where: { email } });
+      return !!user; // Returns true if user exists, false if user is null
+    } catch (error) {
+      console.error('Error checking user email:', error);
+      return false; // Return false in case of any error
+    }
+  }
 
 // POST ROUTE
 router.post('/login', async (req, res) => {
@@ -29,7 +51,7 @@ router.post('/login', async (req, res) => {
             return;
         }
 
-        const validPassword = await userData.checkPassword(req.body.password); 
+        const validPassword = await userData.checkPassword(req.body.password);
 
         if (!validPassword) {
             res

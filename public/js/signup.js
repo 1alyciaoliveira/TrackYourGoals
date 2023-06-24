@@ -13,7 +13,12 @@ const signupFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/profile');
+        const data = await response.json();
+        if (data.message === 'Email already in use.') {
+          alert('This email already exists');
+        } else {
+          document.location.replace('/profile');
+        }
       } else {
         alert(response.statusText);
       }

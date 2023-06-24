@@ -3,21 +3,18 @@
         "user_id": 1,
         "objective_id": 1,
         "quantity": -400,
-        "type": 0,
         "description": "Retiro de efectivo"
     },
     {
         "user_id": 1,
         "objective_id": 1,
         "quantity": 1000,
-        "type": 1,
         "description": "Depósito bancario"
     },
     {
         "user_id": 1,
         "objective_id": 2,
         "quantity": 300,
-        "type": 1,
         "description": "Ingreso por venta"
     }
 ]

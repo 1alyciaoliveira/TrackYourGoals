@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
   ];
-  fetch(`/api/transaction/goal/${id}`)
+  fetch(`/transaction/goal/${id}`)
     .then(response => response.json())
     .then(data => {
       const transactionQuantities = data.transactionQuantities; 
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   const goalId = window.location.toString().split('/').pop();
 
   try {
-    const response = await fetch(`/api/transaction/goal/${goalId}`);
+    const response = await fetch(`/transaction/goal/${goalId}`);
     const data = await response.json();
 
     const transactionTotal = data.transactionQuantities.reduce((total, quantity) => total + quantity, 0);

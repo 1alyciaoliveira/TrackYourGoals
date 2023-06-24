@@ -4,17 +4,6 @@ const withAuth = require('../utils/auth');
 
 // All the GET routes
 
-router.get('/user', async (req, res) => {
-  try {
-    const data = await User.findAll({
-      include: [{ model: Objective, include: { model: Transaction } }]
-    });
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 router.get('/', async (req, res) => {
   try {
     if (req.session.logged_in) {
@@ -38,14 +27,12 @@ router.get('/login', (req, res) => {
     res.redirect('/profile');
     return;
   }
-
   res.render('login');
 });
 
 //get profile page
 router.get('/profile', withAuth, async (req, res) => {
   try {
-
     const user_id = req.session.user_id;
     const userData = await User.findByPk(user_id,
       {
@@ -127,7 +114,7 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 });
 
 // get transaction page
-router.get('/api/transaction/goal/:id', withAuth, async (req, res) => {
+router.get('/transaction/goal/:id', withAuth, async (req, res) => {
   try {
     const user_id = req.session.user_id;
     const goal_id = req.params.id; 

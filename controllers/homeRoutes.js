@@ -104,28 +104,6 @@ router.get('/goal', (req, res) => {
 
 
 
-//== prpouesta uso Auth 
-/*router.get('/profile', withAuth, async (req, res) => {
-try {
-// Find the logged in user based on the session ID
-const userData = await User.findByPk(req.session.user_id, {
-  attributes: { exclude: ['password'] },
-  include: [{ model: Objective }],
-});
-
-const user = userData.get({ plain: true });
-
-res.render('profile', {
-  ...user,
-  logged_in: true
-});
-} catch (err) {
-res.status(500).json(err);
-}
-});
-
- */
-
 router.get('/goal/:id', withAuth, async (req, res) => {	
   const user_id = req.session.user_id;
   const objective_Data = await Objective.findByPk(req.params.id,	
@@ -154,4 +132,29 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 
 });
 
+
+router.get('/api/transactions', withAuth, async (req, res) => {
+  try {
+    const user_id = req.session.user_id;
+    const userData = await User.findByPk(user_id, {
+      include: [
+        {
+          model: Objective,
+          include: {
+            model: Transaction,
+          },
+        },
+      ],
+    });
+
+    // Obtener los resultados de las transacciones del usuario
+    const transactionQuantities = userData.objectives.flatMap(
+      (objective) => objective.transactions.map((transaction) => transaction.quantity)
+    );
+
+    res.status(200).json({ transactionQuantities });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;

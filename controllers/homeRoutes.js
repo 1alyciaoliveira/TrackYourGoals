@@ -98,31 +98,8 @@ router.get('/editgoal', (req, res) => {
 });
 
 //get goal page
-router.get('/goal/:id', withAuth, async (req, res) => {
-  const user_id = req.session.user_id;
-  const objective_Data = await Objective.findByPk(req.params.id,
-    {
-      where: {
-        user_id: user_id
-      },
-      include:[{model: Transaction}]
-    }
-  );
-
-  const obj = {
-    ...objective_Data.get({ plain: true }),
-    logged_in: req.session.logged_in
-  };
-
-  const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);
-  obj.progress = progress;
-
-  obj.transactions.forEach(ob =>{
-    ob.positive = (ob.quantity>0)? true: false;
-
-  });
-
-  res.render('goal', obj);
+router.get('/goal', (req, res) => {
+  res.render('goal');
 });
 
 

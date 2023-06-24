@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  </head>
+  
+  <body>
+    <div class="tabs is-medium">
+        <ul>
+          <li class="is-active"><a>Profile</a></li>
+          <li><a>Logout</a></li>
+        </ul>
+      </div>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-start">
+            <a class="navbar-item">
+              Money Save: User
+            </a> 
+        </div>     
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button has-text-black" id="discover">
+                    <strong>Total</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Objective</th>
+                <th>Progress</th>
+                <th>Total $</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Zapatos</th>
+                <td><progress class="progress is-link" value="30" max="100">30%</progress></td>
+                <td>$100</td>
+              </tr>
+              <tr>
+                <th>Bike</th>
+                <td><progress class="progress is-link" value="70" max="100">70%</progress></td>
+                <td>$300</td>
+              </tr>
+              <tr>
+                <th>Boletos</th>
+                <td><progress class="progress is-link" value="10" max="100">10%</progress></td>
+                <td>$50</td>
+              </tr>
+            </tbody>
+          </table>
+    </body>
+    <footer>
+        <button class="button is-large">Add new objective</button>
+    </footer>
+    </html>

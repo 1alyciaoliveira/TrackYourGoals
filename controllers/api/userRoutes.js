@@ -4,8 +4,6 @@ const { User } = require('../../Models');
 // GET ROUTE
 router.post('/', async (req, res) => {
     try {
-
-        
         
         if(!await checkUserEmail(req.body.email))
         {

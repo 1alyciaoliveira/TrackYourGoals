@@ -1,6 +1,5 @@
 // Function to open the modal
 function openModalNewGoal() {
-		// Add is-active class on the modal
 	document.getElementById("add-new-goal").classList.add("is-active");
 }
 	
@@ -9,8 +8,7 @@ function closeModalNewGoal() {
 	document.getElementById("add-new-goal").classList.remove("is-active");
 }
 	
-// Add event listeners to close the modal
-// whenever user click outside modal
+// Add event listeners to close the modal whenever user click outside modal
 document.querySelectorAll(".modal-background")
 .forEach(($el) => {
 			const $modal = $el.closest(".modal");
@@ -67,4 +65,4 @@ const delButtonHandler = async (event) => {
   }
 };
 
-document.querySelector('#table').addEventListener('click', delButtonHandler);
+document.querySelector('.goal-boxes').addEventListener('click', delButtonHandler);

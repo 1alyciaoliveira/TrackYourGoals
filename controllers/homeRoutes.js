@@ -85,7 +85,12 @@ router.get('/register', (req, res) => {
 router.get('/confirmation', (req, res) => {
   res.render('confirmmail');
 });
-
+router.get('/recovery', (req, res) => {
+  res.render('sendrecoverycode');
+});
+router.get('/password', (req, res) => {
+  res.render('password');
+});
 //get goal page
 router.get('/goal', (req, res) => {
   res.render('goal');

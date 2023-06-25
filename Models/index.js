@@ -2,6 +2,7 @@ const User = require('./User');
 const Transaction = require('./Transaction');
 const Objective = require('./Objective');
 const Verification = require('./Verification');
+const Recovery = require('./Recovery');
 
 
 User.hasMany(Objective, {
@@ -27,4 +28,4 @@ Transaction.belongsTo(Objective, {
     foreignKey:'objective_id'
 });
 
-module.exports = { User, Transaction, Objective, Verification };
+module.exports = { User, Transaction, Objective, Verification , Recovery};

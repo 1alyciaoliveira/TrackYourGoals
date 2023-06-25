@@ -27,14 +27,14 @@ module.exports = {
             console.error(error);
         }
     },
-    SendRecovery: async (email, code) => {
+    SendRecovery: async (data) => {
         try {
             const info = await transporter.sendMail({
                 from: 'Finance Tracker Web <finance_super_tracker@outlook.com>',
-                to: email,
-                subject: 'YOUR PASSWORD RECOVERY!!!',
+                to: data.email,
+                subject: 'YOUR PASSWORD RECOVERY CODE!!!',
                 text: 'Automatic mailer',
-                html: `<a href='someroute/passwordrecovery/${code}'>Follow link to update your password</a>`
+                html: `<h2>Your Recovery Code:</h2><h3>${data.code}</h3>`
             });
 
             console.log('Mensaje enviado:', info.messageId);

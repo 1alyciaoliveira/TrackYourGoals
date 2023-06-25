@@ -1,12 +1,13 @@
 const nodemailer = require('nodemailer');
+const cred = require('../../email.json');
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.office365.com',
     port: 587,
     secure: false,
     auth: {
-        user: 'finance_super_tracker@outlook.com',
-        pass: 'finances_rocks00'
+        user: cred.email,
+        pass: cred.pass
     }
 });
 

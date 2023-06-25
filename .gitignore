@@ -1,6 +1,6 @@
 .env
 /node_modules
-
+email.json
 # Logs
 logs
 *.log

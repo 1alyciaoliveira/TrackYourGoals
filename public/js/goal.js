@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
           labels: transactionQuantities,
           datasets: [{
-            label: 'Quantity',
+            label: '',
             data: transactionQuantities,
             backgroundColor: barColors,
             borderWidth: 1
@@ -220,12 +220,26 @@ document.addEventListener('DOMContentLoaded', function () {
         options: {
           scales: {
             y: {
-
-              beginAtZero: true
+              beginAtZero: true,
+              ticks: {
+                callback: function (value) {
+                  return '$' + value.toFixed(2);
+                }
+              },
+              grid: {
+                display: false
+              }
             },
             x: {
               grid: {
                 display: false
+              }
+            }
+          },
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem) {
+                return '$' + tooltipItem.value.toFixed(2);
               }
             }
           }
@@ -237,8 +251,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// PieChart
 
+
+// PieChart
 document.addEventListener('DOMContentLoaded', async function () {
   const ctx = document.getElementById('pieChart').getContext('2d');
   const goalId = window.location.toString().split('/').pop();
@@ -249,16 +264,17 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const transactionTotal = data.transactionQuantities.reduce((total, quantity) => total + quantity, 0);
     const goalTotal = data.targetQuantity;
+    const savingsPercentage = (transactionTotal / goalTotal) * 100;
 
-    const savingsData = [transactionTotal, goalTotal];
+    const savingsData = [transactionTotal, goalTotal - transactionTotal];
 
     new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Savings', 'Objective'],
+        labels: [`Savings ${savingsPercentage.toFixed(2)}%`],
         datasets: [{
           data: savingsData,
-          backgroundColor: ['#07b318', '#becfc0'],
+          backgroundColor: ['#07b318', 'white'],
           borderWidth: 1
         }]
       },
@@ -268,11 +284,22 @@ document.addEventListener('DOMContentLoaded', async function () {
         plugins: {
           legend: {
             position: 'bottom'
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.dataset.data[context.dataIndex];
+                return '$' + value.toFixed(2);
+              }
+              
+            }
           }
         }
       }
     });
+    
   } catch (error) {
     console.log(error);
   }
 });
+

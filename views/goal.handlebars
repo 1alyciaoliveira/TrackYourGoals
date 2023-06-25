@@ -1,0 +1,198 @@
+<div class="section">
+  <h1 class="title has-text-centered">{{name}}</h1>
+  <div class="columns">
+    <div class="column">
+      <div class="box">
+        <h2 class="title">History</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><abbr title="date">Date</abbr></th>
+              <th><abbr title="amount">Amount</abbr></th>
+              <th><abbr title="description">Description</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {{#each transactions}}
+            {{> transactionhistory}}
+            {{/each}}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box">
+        <h2 class="title">Pie Chart</h2>
+        <p>You have saved ${{progress}} from your ${{target_quantity}} goal.</p>
+        <div>
+          <canvas id="pieChart"> </canvas>
+        </div>
+          
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="columns">
+    <div class="column">
+      <div class="box">
+        <h2 class="title">Transaction Chart</h2>
+        <canvas id="transactionChart"></canvas>
+      </div>
+    </div>
+
+
+    <div class="column">
+      <div class="box">
+        <h2 class="title">Buttons</h2>
+        <div class="buttons are-small">
+          <button class="button" id="add-money" onclick="openModal2();" class="button is-success">Add money</button>
+          <button class="button" id="remove-money" onclick="openModal3();" class="button is-success">Remove
+            money</button>
+          <button class="button" id="edit-goal" onclick="openModal1();" class="button is-success">Edit Goal</button>
+          <button class="button" id="erase-goal" onclick="delButtonHandler();" class="button is-success">Delete
+            Goal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" id="modal1">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <div class="field mr-3 ml-3 mt-3 label"> Edit Objective</div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Objective</label>
+        <div class="control">
+          <input id="objective" class="input" type="text" placeholder="">
+        </div>
+      </div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Amount to save ($)</label>
+        <div class="control has-icons-left has-icons-right">
+          <input id="target-quantity" class="input is-success" type="text" placeholder="Text input">
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Time Target (# of weeks)</label>
+        <div class="control">
+          <div id="time-target" class="select">
+            <select>
+              <option>Select dropdown</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Description</label>
+        <div class="control">
+          <textarea id="super_description" class="textarea" placeholder=""></textarea>
+        </div>
+      </div>
+
+      <div class="field is-grouped mr-3 ml-3">
+        <div class="control">
+          <button class="button is-link" id="edit-submit-btn">Submit</button>
+        </div>
+      </div>
+
+      <footer class="modal-card-foot">
+        <button class="button is-danger">
+          Cancel
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" id="modal2">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <div class="field mr-3 ml-3 mt-3 label">Add money</div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Amount</label>
+        <div class="control">
+          <input id="quantity" class="input" type="text" placeholder="">
+        </div>
+      </div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Description</label>
+        <div class="control">
+          <input id="add_description" class="input" type="text" placeholder="">
+        </div>
+      </div>
+
+      <div class="field is-grouped mr-3 ml-3">
+        <div class="control">
+          <button class="button is-link" id="add-submit-btn">Submit</button>
+        </div>
+      </div>
+
+      <footer class="modal-card-foot">
+        <button class="button is-danger">
+          Cancel
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" id="modal3">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <div class="field mr-3 ml-3 mt-3 label">Remove money</div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Amount</label>
+        <div class="control">
+          <input id="remove-quantity" class="input" type="text" placeholder="">
+        </div>
+      </div>
+
+      <div class="field mr-3 ml-3">
+        <label class="label">Description</label>
+        <div class="control">
+          <input id="description" class="input" type="text" placeholder="">
+        </div>
+      </div>
+
+      <div class="field is-grouped mr-3 ml-3">
+        <div class="control">
+          <button class="button is-link" id="remove-submit-btn">Submit</button>
+        </div>
+      </div>
+
+      <footer class="modal-card-foot">
+        <button class="button is-danger">
+          Cancel
+        </button>
+      </footer>
+    </div>
+  </div>
+
+
+
+  <script src="/js/goal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

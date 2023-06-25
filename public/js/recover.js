@@ -16,7 +16,7 @@ const confirmation = async (event) => {
         });
 
         if (response.ok) {
-            document.location.replace(`password`);
+            document.location.replace(`login`);
         } else {
             alert(response.message || 'Confirmation Failed');
         }

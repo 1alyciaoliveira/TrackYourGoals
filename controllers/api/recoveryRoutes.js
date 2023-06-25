@@ -52,7 +52,9 @@ router.post('/:code', async (req, res) => {
         const useremail = findRecoveryData.get({ plain: true }).email;
 
         if (findRecoveryData) {
-            await User.update({ password: req.body.password }, { where: { email: useremail } });
+            await User.update({ password: req.body.password }, {
+                where: { email: useremail }, individualHooks: true
+            });
             await Recovery.destroy({ where: { code: req.params.code, email: useremail } });
             res.redirect('/login');
         }

@@ -4,7 +4,6 @@ const withAuth = (req, res, next) => {
       res.redirect('/login');
     } else {
       req.session.touch();
-
       next();
     }
   };

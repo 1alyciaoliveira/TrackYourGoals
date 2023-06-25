@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { Objective } = require('../../Models');
+const withAuth = require('../../utils/auth');
 
 // POST ROUTE
-router.post('/', async (req, res) => {
+router.post('/',withAuth, async (req, res) => {
     try {
         const objectiveData = await Objective.create({
             ...req.body,
@@ -15,7 +16,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT ROUTE
-router.put('/:id', async (req, res) => {
+router.put('/:id',withAuth, async (req, res) => {
     try {
         const objectiveData = await Objective.update(
             req.body, { where: { id: req.params.id, user_id: req.session.user_id } }
@@ -31,7 +32,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE ROUTE
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',withAuth, async (req, res) => {
     try {
         const objectiveData = await Objective.destroy( { where: { id: req.params.id, user_id: req.session.user_id } }
         );

@@ -136,11 +136,16 @@ router.get('/transaction/goal/:id', withAuth, async (req, res) => {
       ],
     });
 
-    const objectiveData = userData.objectives[0]; // 
-    const transactionQuantities = objectiveData.transactions.map((transaction) => transaction.quantity);
+    const objectiveData = userData.objectives[0]; 
+    const transactions = objectiveData.transactions.map((transaction) => ({
+      quantity: transaction.quantity,
+      date: transaction.date_created 
+    }));
+    const transactionQuantities = transactions.map((transaction) => transaction.quantity);
     const targetQuantity = objectiveData.target_quantity; 
 
-    res.status(200).json({ transactionQuantities, targetQuantity });
+    res.status(200).json({ transactions, transactionQuantities, targetQuantity });
+    
   } catch (err) {
     res.status(500).json(err);
   }

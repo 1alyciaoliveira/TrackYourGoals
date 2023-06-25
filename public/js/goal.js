@@ -191,13 +191,18 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch(`/transaction/goal/${id}`)
     .then(response => response.json())
     .then(data => {
-      const transactionQuantities = data.transactionQuantities;
+      const transactions = data.transactions;
+      const transactionQuantities = transactions.map(transaction => transaction.quantity);
+      const transactionDates = transactions.map(transaction => new Date(transaction.date).toLocaleDateString());
+
+
+
       const barColors = transactionQuantities.map(value => value >= 0 ? '#70e08e' : '#f55d6c');
 
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: transactionQuantities,
+          labels: transactionDates, 
           datasets: [{
             label: '',
             data: transactionQuantities,
@@ -206,6 +211,19 @@ document.addEventListener('DOMContentLoaded', function () {
           }]
         },
         options: {
+          plugins: {
+            legend: {
+              position: 'none'
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const value = context.dataset.data[context.dataIndex];
+                  return '$' + value.toFixed(2);
+                }
+              }
+            }
+          },
           scales: {
             y: {
               beginAtZero: true,
@@ -224,13 +242,6 @@ document.addEventListener('DOMContentLoaded', function () {
               }
             }
           },
-          tooltips: {
-            callbacks: {
-              label: function (tooltipItem) {
-                return '$' + tooltipItem.value.toFixed(2);
-              }
-            }
-          }
         }
       });
     })
@@ -238,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(error);
     });
 });
+
 
 
 

@@ -82,7 +82,9 @@ router.get('/profile', withAuth, async (req, res) => {
 router.get('/register', (req, res) => {
   res.render('signup');
 });
-
+router.get('/confirmation', (req, res) => {
+  res.render('confirmmail');
+});
 
 //get goal page
 router.get('/goal', (req, res) => {

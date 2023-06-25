@@ -17,7 +17,7 @@ const signupFormHandler = async (event) => {
         if (data.message === 'Email already in use.') {
           alert('This email already exists');
         } else {
-          document.location.replace('/profile');
+          document.location.replace('/confirmation');
         }
       } else {
         alert(response.statusText);

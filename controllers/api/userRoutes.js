@@ -65,10 +65,7 @@ router.post('/login', async (req, res) => {
             return;
         }
         if (!data.isVerified) {
-            res
-                .status(400)
-                .json({ message: 'Email has not been verified' }); // NOT BEING SHOWN TO THE USER
-            return;
+            res.redirect('/confirmation');
         }
 
         req.session.save(() => {

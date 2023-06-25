@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Verification } = require('../../Models');
 
-router.get('/:code', async (req, res) => {
+router.post('/:code', async (req, res) => {
     try {
         
         const findverificationData = await Verification.findOne({ where: { code: req.params.code } });

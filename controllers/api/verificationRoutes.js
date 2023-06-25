@@ -7,9 +7,9 @@ router.get('/:code', async (req, res) => {
         const findverificationData = await Verification.findOne({ where: { code: req.params.code } });
         const useremail = findverificationData.get({ plain: true }).email;
         
-        if (!findverificationData) {
+        if (findverificationData) {
             await User.update({isVerified: true}, {where:{email:useremail}});
-            await Verification.destroy( { where: { code: req.params.code, email: req.session.user_id } });
+            await Verification.destroy( { where: { code: req.params.code, email: useremail } });
             res.status(200).json({email: useremail});
         }
         else{

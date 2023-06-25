@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User , Verification } = require('../../Models');
+const { User, Verification } = require('../../Models');
 const mailer = require('../../utils/libs/emailer');
 
 
@@ -15,16 +15,11 @@ router.post('/', async (req, res) => {
                 code: codeData
             }
             const verificationData = await Verification.create(verificationJson);
-            if(verificationData){
+            if (verificationData) {
                 mailer.SendVerification(verificationJson);
             }
 
-            req.session.save(() => {
-                req.session.user_id = userData.id;
-                req.session.logged_in = true;
-
-                res.status(200).json(userData);
-            });
+            res.status(200).json(userData);
 
         } else {
             res.status(200).json({ message: 'Email already in use.' });

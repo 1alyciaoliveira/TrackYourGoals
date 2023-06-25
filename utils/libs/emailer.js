@@ -18,7 +18,7 @@ module.exports = {
                 to: data.email,
                 subject: 'YOUR ACCOUNT VERIFICATION CODE!!!',
                 text: 'Automatic mailer',
-                html: `<a href='localhost:3001/verification/${data.code}'>Verify your Email</a>`
+                html: `<h2>Your Verification Code:</h2><h3>${data.code}</h3>`
             });
 
             console.log('Mensaje enviado:', info.messageId);

@@ -23,7 +23,7 @@ const signupFormHandler = async (event) => {
             document.location.replace('/profile');
           }
         } else {
-          alert(response.statusText);
+          document.location.replace('/confirmation');
         }
       } else {
         alert('Passwords do not match');

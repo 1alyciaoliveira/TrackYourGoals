@@ -6,7 +6,9 @@ const mailer = require('../../utils/libs/emailer');
 // GET ROUTE
 router.post('/', async (req, res) => {
     try {
+
         if (!await checkUserEmail(req.body.email)) {
+
             const userData = await User.create(req.body);
             const codeData = Math.floor(100000 + Math.random() * 900000);
 

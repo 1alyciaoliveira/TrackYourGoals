@@ -6,7 +6,7 @@ class User extends Model {
     checkPassword(loginPw) {
         return bcrypt.compareSync(loginPw, this.password);
     }
-} 
+}
 User.init(
     {
         id: {
@@ -33,6 +33,11 @@ User.init(
             validate: {
                 len: [8],
             },
+        },
+        isVerified: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
         },
     },
     {

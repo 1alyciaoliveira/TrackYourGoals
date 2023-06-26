@@ -1,27 +1,25 @@
-<div class="hero is-small">
-  <div class="hero-head">
-    <nav class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <p class="subtitle is-5">
-            <strong>Hi, {{name}}</strong>
-          </p>
-      </div>
-    </nav>
-  </div>
+<link rel="stylesheet" href="/css/profile.css">
 
-  <div class="hero-body is-justify-content-center is-align-items-center">
-    <div class="container has-text-centered">
-      <div class="column is-half is-offset-one-quarter">
-        <div class="box has-text-centered">
-      <p class="subtitle is-5">
-        <strong>You have {{total_ongoing_sum}} as tracking total!</strong>
-      </p>
+
+<div class="container">
+  <div class="columns is-multiline is-mobile">
+    <div class="column is-three-fifths is-offset-one-fifth">
+      <div class="columns">
+        <div class="column">
+          <div class="box has-text-centered" id="hello">
+            <div class="title is-5">
+              Hi, {{name}}
+            </div>
+            <p class="subtitle is-5">
+              You have ${{total_ongoing_sum}} as tracking total!
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="goal-boxes">
   <div class="columns is-multiline is-mobile">

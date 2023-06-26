@@ -3,10 +3,12 @@
         <div class="columns is-multiline">
         <div class="column is-8 is-offset-2 register">
           <div class="columns">
-             <div class="column left">
+             <div class="column left" id="left-login">
+              <div class="img">
               <object data="./img/login.svg" width="300px"></object>
+              </div>
             </div>
-            <div class="column right">
+            <div class="column right" id="right-login">
               <h1 class="title colored is-4">Login</h1>
              <form>
           <div class="field">
@@ -30,7 +32,8 @@
           <button id="login" class="button is-primary is-fullwidth" type="submit">Login</button>
       
           <div class="has-text-centered" style="padding-top:5px;">
-            <p class="is-size-8"> Don't have an account? <a href="/register" class="has-text-primary" id="signup-link">Sign up</a>
+            <p class="is-size-8"> Don't have an account? 
+              <a href="/register" class="has-text-primary" id="signup-link">Sign up</a>
             </p>
           </div>
         </form>

@@ -63,12 +63,12 @@ router.post('/login', async (req, res) => {
         } else if (!userData) {
             res
                 .status(400)
-                .json({ message: 'Incorrect email or password, please try again' }); // NOT BEING SHOWN TO THE USER
+                .json({ message: 'Incorrect email or password, please try again' }); 
             return;
         } else if (!validPassword) {
             res
                 .status(400)
-                .json({ message: 'Incorrect email or password, please try again' }); // NOT BEING SHOWN TO THE USER
+                .json({ message: 'Incorrect email or password, please try again' }); 
             return;
         } else {
             req.session.save(() => {

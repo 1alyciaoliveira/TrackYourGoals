@@ -136,12 +136,12 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 router.get('/transaction/goal/:id', withAuth, async (req, res) => {
   try {
     const user_id = req.session.user_id;
-    const goal_id = req.params.id;
+    const goal_id = req.params.id; 
     const userData = await User.findByPk(user_id, {
       include: [
         {
           model: Objective,
-          where: { id: goal_id },
+          where: { id: goal_id }, 
           include: {
             model: Transaction,
           },
@@ -149,15 +149,21 @@ router.get('/transaction/goal/:id', withAuth, async (req, res) => {
       ],
     });
 
-    const objectiveData = userData.objectives[0]; // 
-    const transactionQuantities = objectiveData.transactions.map((transaction) => transaction.quantity);
-    const targetQuantity = objectiveData.target_quantity;
+    const objectiveData = userData.objectives[0]; 
+    const transactions = objectiveData.transactions.map((transaction) => ({
+      quantity: transaction.quantity,
+      date: transaction.date_created 
+    }));
+    const transactionQuantities = transactions.map((transaction) => transaction.quantity);
+    const targetQuantity = objectiveData.target_quantity; 
 
-    res.status(200).json({ transactionQuantities, targetQuantity });
+    res.status(200).json({ transactions, transactionQuantities, targetQuantity });
+    
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 
 module.exports = router;

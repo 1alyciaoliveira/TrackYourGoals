@@ -25,9 +25,14 @@ const loginFormHandler = async (event) => {
         }
         
       } else {
-        alert(response.statusText);
+        const errorData = await response.json();
+        alert(errorData.message); 
       }
     }
-  }; 
+  };  
+
+
+  
+  
 
 document.querySelector('#login').addEventListener('click', loginFormHandler);

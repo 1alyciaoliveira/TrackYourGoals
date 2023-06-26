@@ -1,6 +1,7 @@
 .env
 
 email.json
+
 # Logs
 logs
 *.log

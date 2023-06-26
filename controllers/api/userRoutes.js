@@ -47,33 +47,38 @@ router.post('/login', async (req, res) => {
         const userData = await User.findOne({ where: { email: req.body.email } });
         const data = userData.get({ plain: true });
 
-        console.log(data.isVerified);
-
-        if (!userData) {
-            res
-                .status(400)
-                .json({ message: 'Incorrect email or password, please try again' }); // NOT BEING SHOWN TO THE USER
-            return;
-        }
-
+        console.log(data);
         const validPassword = await userData.checkPassword(req.body.password);
 
-        if (!validPassword) {
+        if (!data.isVerified) {
+
+            const verificationData = await Verification.findOne({ where: { email: req.body.email } });
+            const verificationdata = verificationData.get({ plain: true });
+
+            if (verificationdata) {
+                mailer.SendVerification(verificationdata);
+            }
+            res.status(200).json({ message: 'Your Email is not verified' });
+            return;
+        } else if (!userData) {
             res
                 .status(400)
                 .json({ message: 'Incorrect email or password, please try again' }); // NOT BEING SHOWN TO THE USER
             return;
-        }
-        if (!data.isVerified) {
-            res.redirect('/confirmation');
+        } else if (!validPassword) {
+            res
+                .status(400)
+                .json({ message: 'Incorrect email or password, please try again' }); // NOT BEING SHOWN TO THE USER
+            return;
+        } else {
+            req.session.save(() => {
+                req.session.user_id = userData.id;
+                req.session.logged_in = true;
+
+                res.status(200).json({ user: userData, message: 'You are now logged in!' });
+            });
         }
 
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.logged_in = true;
-
-            res.json({ user: userData, message: 'You are now logged in!' });
-        });
 
     } catch (err) {
         res.status(400).json(err);

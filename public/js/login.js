@@ -15,7 +15,15 @@ const loginFormHandler = async (event) => {
   
       if (response.ok) {
         // If successful, redirect the browser to the profile page
-        document.location.replace('/profile');
+        const data = await response.json();
+
+        if (data.message === 'Your Email is not verified') {
+          alert('Your Email is not verified\nA Verification Code has been sent to your email');
+          document.location.replace('/confirmation');
+        } else {
+          document.location.replace('/profile');
+        }
+        
       } else {
         alert(response.statusText);
       }

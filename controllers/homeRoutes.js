@@ -36,7 +36,7 @@ router.get('/profile', withAuth, async (req, res) => {
     const user_id = req.session.user_id;
     const userData = await User.findByPk(user_id,
       {
-        attributes: ['name'],
+        attributes: ['name', 'isVerified'],
         include: [
           {
             model: Objective,
@@ -47,42 +47,48 @@ router.get('/profile', withAuth, async (req, res) => {
           }
         ]
       });
+    
+      if (userData.get({ plain: true }).isVerified) {
+        
+        const obj = {
+          ...userData.get({ plain: true }),
+          logged_in: req.session.logged_in
+        };
+        
+        let total_target_sum = 0;
+        let total_ongoing_sum = 0;
+        obj.objectives.forEach(obj => {
+          total_target_sum = total_target_sum + obj.target_quantity;
+          const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);
+          const progressPercent = (progress / obj.target_quantity) * 100;
 
-    const obj = {
-      ...userData.get({ plain: true }),
-      logged_in: req.session.logged_in
-    };
-
-    let total_target_sum = 0;
-    let total_ongoing_sum = 0;
-    obj.objectives.forEach(obj => {
-      total_target_sum = total_target_sum + obj.target_quantity;
-      const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);
-      const progressPercent = (progress / obj.target_quantity) * 100;
+          total_ongoing_sum = total_ongoing_sum + progress;
+          obj.progress = progressPercent;
+        });
+        
+        obj.total_target_sum = total_target_sum;
+        obj.total_ongoing_sum = total_ongoing_sum;
+        
+        console.log(obj.objectives);
+        
+        res.render('profile', { ...obj, logged_in: req.session.logged_in });
+      } else {
+        res.redirect('/login');
+      }
+        
+      } catch (err) {
+        res.status(500).json(err);
+        
+      }
       
-      total_ongoing_sum = total_ongoing_sum + progress;
-      obj.progress = progressPercent;
     });
     
-    obj.total_target_sum = total_target_sum;
-    obj.total_ongoing_sum =total_ongoing_sum;
-
-    console.log(obj.objectives);
-
-    res.render('profile', { ...obj, logged_in: req.session.logged_in });
-
-  } catch (err) {
-    res.status(500).json(err);
-
-  }
-
-});
-
 //get register page
 router.get('/register', (req, res) => {
   res.render('signup');
 });
 router.get('/confirmation', (req, res) => {
+
   res.render('confirmmail');
 });
 router.get('/recovery', (req, res) => {
@@ -98,29 +104,29 @@ router.get('/goal', (req, res) => {
 
 
 //get goal per id
-router.get('/goal/:id', withAuth, async (req, res) => {	
+router.get('/goal/:id', withAuth, async (req, res) => {
   const user_id = req.session.user_id;
-  const objective_Data = await Objective.findByPk(req.params.id,	
-    {	
-      where: {	
-        user_id: user_id	
-      },	
-      include:[{model: Transaction}]	
-    }	
-  );	
+  const objective_Data = await Objective.findByPk(req.params.id,
+    {
+      where: {
+        user_id: user_id
+      },
+      include: [{ model: Transaction }]
+    }
+  );
 
-  const obj = {	
-    ...objective_Data.get({ plain: true }),	
-    logged_in: req.session.logged_in	
-  };	
+  const obj = {
+    ...objective_Data.get({ plain: true }),
+    logged_in: req.session.logged_in
+  };
 
-  const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);	
-  obj.progress = progress;	
+  const progress = obj.transactions.reduce((total, transaction) => total + transaction.quantity, 0);
+  obj.progress = progress;
 
-  obj.transactions.forEach(ob =>{	
-    ob.positive = (ob.quantity>0)? true: false;	
+  obj.transactions.forEach(ob => {
+    ob.positive = (ob.quantity > 0) ? true : false;
 
-  });	
+  });
 
   res.render('goal', obj);
 
@@ -130,12 +136,12 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 router.get('/transaction/goal/:id', withAuth, async (req, res) => {
   try {
     const user_id = req.session.user_id;
-    const goal_id = req.params.id; 
+    const goal_id = req.params.id;
     const userData = await User.findByPk(user_id, {
       include: [
         {
           model: Objective,
-          where: { id: goal_id }, 
+          where: { id: goal_id },
           include: {
             model: Transaction,
           },
@@ -145,7 +151,7 @@ router.get('/transaction/goal/:id', withAuth, async (req, res) => {
 
     const objectiveData = userData.objectives[0]; // 
     const transactionQuantities = objectiveData.transactions.map((transaction) => transaction.quantity);
-    const targetQuantity = objectiveData.target_quantity; 
+    const targetQuantity = objectiveData.target_quantity;
 
     res.status(200).json({ transactionQuantities, targetQuantity });
   } catch (err) {

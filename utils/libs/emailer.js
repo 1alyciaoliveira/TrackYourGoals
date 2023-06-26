@@ -17,7 +17,7 @@ module.exports = {
             const info = await transporter.sendMail({
                 from: 'Finance Tracker Web <finance_super_tracker@outlook.com>',
                 to: data.email,
-                subject: 'YOUR ACCOUNT VERIFICATION CODE!!!',
+                subject: 'Please use the following verification code to complete your registration process.',
                 text: 'Automatic mailer',
                 html: `<h2>Your Verification Code:</h2><h3>${data.code}</h3>`
             });

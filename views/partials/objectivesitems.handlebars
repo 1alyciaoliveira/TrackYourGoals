@@ -1,6 +1,17 @@
-<tr>
-    <th><a href="/goal/{{id}}">{{name}}</a></th>
-    <td><progress class="progress is-link" value="{{progress}}" max="100">{{progress}}%</progress></td>
-    <td>${{target_quantity}}</td>
-    <td><button class="button is-danger is-small" data-id="{{id}}">Delete</button></td>
-</tr>
+<div class="column is-three-fifths is-offset-one-fifth">
+    <div class="box">
+        <div class="title is-5">
+            <a href="/goal/{{id}}">{{name}}</a>
+        </div>
+        <div class="subtitle is-6">
+            {{description}}
+        </div>
+        <div class="progress-bar">
+            <progress class="progress is-link" value="{{progress}}" max="100">{{progress}}%</progress>
+        </div>
+        <div class="subtitle is-6">
+           <p>Your target is ${{target_quantity}}</p>
+        </div>
+        <button class="button is-danger is-small" data-id="{{id}}">Delete</button></td>
+    </div>
+</div>

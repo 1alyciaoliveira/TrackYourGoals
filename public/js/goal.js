@@ -86,8 +86,15 @@ const addMoneyHandler = async (event) => {
   event.preventDefault();
 
   const quantity = document.querySelector('#add-quantity').value.trim();
+
+  // Conditional to manage empty input from here (can be also solved from Models)
+  if (quantity === '') {
+    alert('Please enter a value');
+    return;
+  }
+
   const description = document.querySelector('#add-description').value.trim();
-  
+
   console.log(description);
 
   const id = window.location.toString().split('/')[
@@ -97,7 +104,7 @@ const addMoneyHandler = async (event) => {
 
   const response = await fetch(`/api/transaction/${id}`, {
     method: 'POST',
-    body: JSON.stringify({ quantity, description}),
+    body: JSON.stringify({ quantity, description }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -123,9 +130,18 @@ const removeMoneyHandler = async (event) => {
   event.preventDefault();
 
   const removeQuantity = document.querySelector('#remove-quantity');
+
+  // Conditional to manage empty input from here (can be also solved from Models)
+  if (removeQuantity.value.trim() === '') {
+    alert('Please enter a value');
+    return;
+  }
+
   const negativeQuantity = parseFloat(removeQuantity.value.trim());
   const quantity = -1 * negativeQuantity;
   const description = document.querySelector('#remove-description').value.trim();
+
+
 
   console.log(description);
 
@@ -136,7 +152,7 @@ const removeMoneyHandler = async (event) => {
 
   const response = await fetch(`/api/transaction/${id}`, {
     method: 'POST',
-    body: JSON.stringify({ quantity, description}),
+    body: JSON.stringify({ quantity, description }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -154,7 +170,6 @@ const removeMoneyHandler = async (event) => {
 
 
 document.querySelector('#remove-submit-btn').addEventListener('click', removeMoneyHandler);
-
 
 
 // Create Delete Goal
@@ -195,14 +210,12 @@ document.addEventListener('DOMContentLoaded', function () {
       const transactionQuantities = transactions.map(transaction => transaction.quantity);
       const transactionDates = transactions.map(transaction => new Date(transaction.date).toLocaleDateString());
 
-
-
       const barColors = transactionQuantities.map(value => value >= 0 ? '#70e08e' : '#f55d6c');
 
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: transactionDates, 
+          labels: transactionDates,
           datasets: [{
             label: '',
             data: transactionQuantities,
@@ -226,20 +239,23 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           scales: {
             y: {
-              beginAtZero: true,
               ticks: {
                 callback: function (value) {
                   return '$' + value.toFixed(2);
                 }
               },
               grid: {
-                display: false
+                display: true
               }
             },
             x: {
               grid: {
                 display: false
-              }
+              },
+              ticks: {
+                display: false
+              },
+              drawBorder: false
             }
           },
         }
@@ -249,9 +265,6 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(error);
     });
 });
-
-
-
 
 // PieChart
 document.addEventListener('DOMContentLoaded', async function () {
@@ -291,13 +304,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const value = context.dataset.data[context.dataIndex];
                 return '$' + value.toFixed(2);
               }
-              
+
             }
           }
         }
       }
     });
-    
+
   } catch (error) {
     console.log(error);
   }

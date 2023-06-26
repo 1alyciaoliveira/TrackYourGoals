@@ -1,5 +1,5 @@
 <div class="column is-three-fifths is-offset-one-fifth">
-    <div class="box">
+    <div class="box" id="goal-boxes">
         <div class="title is-5">
             <a href="/goal/{{id}}">{{name}}</a>
         </div>
@@ -7,7 +7,7 @@
             {{description}}
         </div>
         <div class="progress-bar">
-            <progress class="progress is-link" value="{{progress}}" max="100">{{progress}}%</progress>
+            <progress class="progress is-primary" value="{{progress}}" max="100">{{progress}}%</progress> 
         </div>
         <div class="subtitle is-6">
            <p>Your target is ${{target_quantity}}</p>

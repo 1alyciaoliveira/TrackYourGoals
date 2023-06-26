@@ -1,37 +1,37 @@
 // Function to open the modal
-function openModal1() {
+function openModalEditGoal() {
 
   // Add is-active class on the modal
-  document.getElementById("modal1").classList.add("is-active");
+  document.getElementById("edit-goal").classList.add("is-active");
 }
 
 // Function to close the modal
-function closeModal1() {
-  document.getElementById("modal1").classList.remove("is-active");
+function closeModalEditGoal() {
+  document.getElementById("edit-goal").classList.remove("is-active");
 }
 
 // Function to open the modal
-function openModal2() {
+function openModalAddMoney() {
 
   // Add is-active class on the modal
-  document.getElementById("modal2").classList.add("is-active");
+  document.getElementById("add-money").classList.add("is-active");
 }
 
 // Function to close the modal
-function closeModal2() {
-  document.getElementById("modal2").classList.remove("is-active");
+function closeModalAddMoney() {
+  document.getElementById("add-money").classList.remove("is-active");
 }
 
 // Function to open the modal
-function openModal3() {
+function openModalRemoveMoney() {
 
   // Add is-active class on the modal
-  document.getElementById("modal3").classList.add("is-active");
+  document.getElementById("remove-money").classList.add("is-active");
 }
 
 // Function to close the modal
-function closeModal3() {
-  document.getElementById("modal3").classList.remove("is-active");
+function closeModaRemoveMoney() {
+  document.getElementById("remove-money").classList.remove("is-active");
 }
 
 // Add event listeners to close the modal
@@ -47,25 +47,13 @@ document.querySelectorAll(
   });
 });
 
-/*
-	
-// Adding keyboard event listeners to close the modal
-document.addEventListener("keydown", (event) => {
-const e = event || window.event;
-if (e.keyCode === 27) {
-	
-// Using escape key
-closeModal();
-}
-});
-*/
 
 const editHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#objective').value.trim();
+  const name = document.querySelector('#goal-page-goal').value.trim();
   const target_quantity = document.querySelector('#target-quantity').value.trim();
-  const description = document.querySelector('#description').value.trim();
+  const description = document.querySelector('#edit-description').value.trim();
 
   const id = window.location.toString().split('/')[
     window.location.toString().split('/').length - 1
@@ -97,8 +85,8 @@ document.querySelector('#edit-submit-btn').addEventListener('click', editHandler
 const addMoneyHandler = async (event) => {
   event.preventDefault();
 
-  const quantity = document.querySelector('#quantity').value.trim();
-  const description = document.querySelector('#add_description').value.trim();
+  const quantity = document.querySelector('#add-quantity').value.trim();
+  const description = document.querySelector('#add-description').value.trim();
   
   console.log(description);
 
@@ -137,7 +125,7 @@ const removeMoneyHandler = async (event) => {
   const removeQuantity = document.querySelector('#remove-quantity');
   const negativeQuantity = parseFloat(removeQuantity.value.trim());
   const quantity = -1 * negativeQuantity;
-  const description = document.querySelector('#description').value.trim();
+  const description = document.querySelector('#remove-description').value.trim();
 
   console.log(description);
 
@@ -203,32 +191,57 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch(`/transaction/goal/${id}`)
     .then(response => response.json())
     .then(data => {
-      const transactionQuantities = data.transactionQuantities;
+      const transactions = data.transactions;
+      const transactionQuantities = transactions.map(transaction => transaction.quantity);
+      const transactionDates = transactions.map(transaction => new Date(transaction.date).toLocaleDateString());
+
+
+
       const barColors = transactionQuantities.map(value => value >= 0 ? '#70e08e' : '#f55d6c');
 
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: transactionQuantities,
+          labels: transactionDates, 
           datasets: [{
-            label: 'Quantity',
+            label: '',
             data: transactionQuantities,
             backgroundColor: barColors,
             borderWidth: 1
           }]
         },
         options: {
+          plugins: {
+            legend: {
+              position: 'none'
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const value = context.dataset.data[context.dataIndex];
+                  return '$' + value.toFixed(2);
+                }
+              }
+            }
+          },
           scales: {
             y: {
-
-              beginAtZero: true
+              beginAtZero: true,
+              ticks: {
+                callback: function (value) {
+                  return '$' + value.toFixed(2);
+                }
+              },
+              grid: {
+                display: false
+              }
             },
             x: {
               grid: {
                 display: false
               }
             }
-          }
+          },
         }
       });
     })
@@ -237,8 +250,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// PieChart
 
+
+
+// PieChart
 document.addEventListener('DOMContentLoaded', async function () {
   const ctx = document.getElementById('pieChart').getContext('2d');
   const goalId = window.location.toString().split('/').pop();
@@ -249,16 +264,17 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const transactionTotal = data.transactionQuantities.reduce((total, quantity) => total + quantity, 0);
     const goalTotal = data.targetQuantity;
+    const savingsPercentage = (transactionTotal / goalTotal) * 100;
 
-    const savingsData = [transactionTotal, goalTotal];
+    const savingsData = [transactionTotal, goalTotal - transactionTotal];
 
     new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Savings', 'Objective'],
+        labels: [`Savings ${savingsPercentage.toFixed(2)}%`],
         datasets: [{
           data: savingsData,
-          backgroundColor: ['#07b318', '#becfc0'],
+          backgroundColor: ['#07b318', 'white'],
           borderWidth: 1
         }]
       },
@@ -268,11 +284,22 @@ document.addEventListener('DOMContentLoaded', async function () {
         plugins: {
           legend: {
             position: 'bottom'
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.dataset.data[context.dataIndex];
+                return '$' + value.toFixed(2);
+              }
+              
+            }
           }
         }
       }
     });
+    
   } catch (error) {
     console.log(error);
   }
 });
+

@@ -27,7 +27,9 @@ Transaction.init(
         },
         quantity: {
             type: DataTypes.INTEGER,
-            allowNull:true // changed to true so it can accept negative values
+            allowNull:true // changed to true so it can accept negative values 
+            //If it´s change to false 
+            //we prevent that the user submits an empty input and it´s handle with the same ERROR that is on addMoney, since the remove feature is working with TINYINT. 
         },
         description: {
             type: DataTypes.STRING,

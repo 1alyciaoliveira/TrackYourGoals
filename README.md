@@ -20,6 +20,13 @@
 8. [Code Examples](#code)
 9. [Credits](#credits)
 10. [Licence](#licence)
+## Installation:
+Github  
+```https://github.com/1alyciaoliveira/TrackYourGoals.git ```  
+Heroku  
+```https://track-your-goals-180d59665ffa.herokuapp.com/login```  
+Local  
+```git clone https://github.com/1alyciaoliveira/TrackYourGoals.git ``` 
 ## Usage: (sreenshots)
 #### Signing Up
 - Add up email, username.

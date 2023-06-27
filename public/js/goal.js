@@ -71,9 +71,13 @@ const editHandler = async (event) => {
 
     if (response.ok) {
       // alert('Objective updated');
-      openModal('Objective updated', 'success');
-
-      document.location.replace(`/goal/${id}`);
+      const data = await response.json();
+      if (data.message ==='Cannot use negative number as target amount') {
+        openModal(`${data.message}`, 'danger');  
+      } else {        
+        openModal('Objective updated', 'success');
+        document.location.replace(`/goal/${id}`);
+      }
     } else {
       // alert(data.message || 'Failed to edit objective');
       openModal('Failed to edit objective', 'danger');
@@ -167,8 +171,13 @@ const removeMoneyHandler = async (event) => {
 
   if (response.ok) {
     // alert('Money removed');
-    openModal('Money removed', 'success');
-    document.location.replace(`/goal/${id}`);
+    const data = await response.json();
+      if (data.message ==='Cannot remove more than the remaining amount') {
+        openModal(`${data.message}`, 'danger');  
+      } else {                
+        openModal('Money removed', 'success');
+        document.location.replace(`/goal/${id}`);
+      }
   } else {
     // alert(response.message || 'Failed to remove money');
     openModal('Failed to remove money', 'danger');

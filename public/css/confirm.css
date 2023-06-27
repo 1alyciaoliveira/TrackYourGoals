@@ -1,0 +1,18 @@
+:root {
+    --brandColor: hsl(166, 67%, 51%);
+    --background: #45BF78;
+    --textDark: hsla(0, 0%, 0%, 0.66);
+    --textLight: hsla(0, 0%, 0%, 0.33);
+  }
+
+body {
+    background: var(--background);
+    height: 100vh;
+    color: var(--textDark);
+  }
+#imgcode {
+  background: rgba(255, 255, 255, .5);
+  border-radius: 25px 25px 0px 0px;
+}
+
+  @import 'bulma/css/bulma.css'

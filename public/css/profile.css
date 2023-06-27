@@ -37,5 +37,7 @@ body {
 #goal-boxes .progress-bar {
     padding-bottom: 10px;
 }
-
+#add-button-section {
+    margin-top: 50px;
+}
 @import 'bulma/css/bulma.css'

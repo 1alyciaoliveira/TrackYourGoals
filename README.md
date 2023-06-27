@@ -60,18 +60,26 @@ Navigate towards creation of your new financial objective.
 ### Goal Dashboard Viewer
 
 - Goal Transaction Menu  
-  - Add Money 
-  - Remove Money
-  - Edit Goal
-  - Delete Goal
-- Progress
-- History 
-- Statistics 
+![Goal Transaction](./assets/images/goalDashboard_Menu.png "transaction_Menu")
+    Add Money  
+  ![Add_Money](./assets/images/addMoney.png "add_Money")
+    Remove Money  
+    - Withdrawal button, keep track of those financial moments where we have to change strategy and spend some of our savings for a good reason. Keep track of those expenditures. 
+  ![Remove_Money](./assets/images/removeMoney.png "Remove_Money")  
+    Goal Editing  
+    - Clic on goal title to modify.  
+  ![Edit_Goal](./assets/images/edit_Goal.png "Edit_Goal")
+    Delete Goal
+  ![Delete_Goal](./assets/images/rmGoal.png "Delete Goal")
+- Track Your Progress
+![Progress](./assets/images/progress.png "Progress")
+- Track Your Transaction History 
+![History](./assets/images/history.png "History")
+- View Your Transaction Statistics 
+![Statistics](./assets/images/statistic.png "Statistics")
 
 ### Edit Goal
-- Clic on goal title to modify.
-- Register the time preference and frequency of saving.
-- Withdrawal button, keep track of those financial moments where we have to change strategy and spend some of our savings for a good reason. Keep track of those expenditures.   
+
 
 ## Build:
 - Undraw.co (SVG)
@@ -82,7 +90,7 @@ Navigate towards creation of your new financial objective.
  - MySQL
 
 ## API:
-- api 1
+- Routes
 
 ## Challenges 
 - challenges you faced and features you hope to implement in the future. 

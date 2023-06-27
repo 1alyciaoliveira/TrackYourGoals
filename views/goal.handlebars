@@ -1,61 +1,64 @@
-<div class="section">
-  <h1 class="title has-text-centered">{{name}}</h1>
-  <div class="columns is-multiline is-mobile">
+<link rel="stylesheet" href="/css/goal.css">
 
-    <div class="column is-three-fifths is-offset-one-fifth">
-      <div class="box">
-        <h2 class="title">Progress</h2>
-        <p>You have saved ${{format_amount  progress}} from your ${{format_amount target_quantity}} goal.</p>
-        <div>
-          <canvas id="pieChart"> </canvas>
-        </div> 
-      </div>
-    </div>
-
-    <div class="column is-three-fifths is-offset-one-fifth">
+<div class="container">
+  <div class="columns is-multiline is-mobile is-justify-content-center">
+    <div class="column is-three-fifths is-flex is-flex-direction-column is-align-items-center">
+      <div class="title">{{name}}</div>
       <div class="buttons are-small">
         <button class="button" id="add-money-modal" onclick="openModalAddMoney();" class="button is-success">Add money</button>
-          <button class="button" id="remove-money-modal" onclick="openModalRemoveMoney();" class="button is-success">Remove
-            money</button>
-          <button class="button" id="edit-goal-modal" onclick="openModalEditGoal();" class="button is-success">Edit Goal</button>
-          <button class="button" id="erase-goal" onclick="delButtonHandler();" class="button is-success">Delete
-            Goal</button>
-        </div>
+        <button class="button" id="remove-money-modal" onclick="openModalRemoveMoney();" class="button is-success">Remove money</button>
+        <button class="button" id="edit-goal-modal" onclick="openModalEditGoal();" class="button is-success">Edit Goal</button>
+        <button class="button" id="erase-goal" onclick="delButtonHandler();" class="button is-success">Delete Goal</button>
       </div>
     </div>
+  </div>
 
-    <div class="column is-three-fifths is-offset-one-fifth">
-      <div class="box">
-        <h2 class="title">History</h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th><abbr title="date">Date</abbr></th>
-              <th><abbr title="amount">Amount</abbr></th>
-              <th><abbr title="description">Description</abbr></th>
-            </tr>
-          </thead>
+  <div class="column is-three-fifths is-offset-one-fifth">
+    <div class="box">
+      <h2 class="title">Progress</h2>
+      <p>You have saved ${{progress}} from your ${{target_quantity}} goal.</p>
+      <div>
+        <canvas id="pieChart"> </canvas>
+      </div> 
+    </div>
+  </div>
+
+  <div class="column is-three-fifths is-offset-one-fifth">
+    <div class="box is-flex is-flex-direction-column">
+      <h2 class="title">History</h2>
+      <table class="table has-text-centered">
+        <thead>
+          <tr>
+            <th><abbr title="date">Date</abbr></th>
+            <th><abbr title="amount">Amount</abbr></th>
+            <th><abbr title="description">Description</abbr></th>
+          </tr>
+        </thead>
       
-          <tbody>
-
-            {{#each transactions}}
-            {{> transactionhistory}}
-            {{/each}}
-          </tbody>
+        <tbody>
+          {{#each transactions}}
+          {{> transactionhistory}}
+          {{/each}}
+        </tbody>
         
-        </table>
-      </div>
+      </table>
     </div>
+  </div>
   
-    <div class="column is-three-fifths is-offset-one-fifth">
-      <div class="box">
-        <h2 class="title">Statistics</h2>
-        <canvas id="transactionChart"></canvas>
-      </div>
+  <div class="column is-three-fifths is-offset-one-fifth">
+    <div class="box">
+      <h2 class="title">Statistics</h2>
+      <canvas id="transactionChart"></canvas>
     </div>
+  </div>
 
+  <div class="columns is-multiline is-mobile is-justify-content-center">
+    <div class="column is-three-fifths is-flex is-flex-direction-column is-align-items-center">
+      <button class="button" class="button is-success"><a href="/profile">Back</a></button>
+    </div>
   </div>
 </div>
+
 
 <!-- MODALS -->
 

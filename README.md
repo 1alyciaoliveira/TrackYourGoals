@@ -46,13 +46,13 @@ git clone https://github.com/1alyciaoliveira/TrackYourGoals.git
 
 #### Log In
 ![Log_In](./assets/images/logIn.png "Loging In")
-- Prompted to add your User Name and Secret Password. 
+Prompted to add your User Name and Secret Password. 
 
 #### ADD a New Goal
 ![Add_New_Goal](./assets/images/addNewGoal.png "Goal")  
 
-- Navigate towards creation of your new financial objective.    
-![Add_New_Goal](./assets/images/clicModify_Goal.png"goal_configuration")
+Navigate towards creation of your new financial objective.    
+![Add_New_G0a1](./assets/images/addNewGoal2.png "new Goal")
 - Add a goal title.  
 - Add a saving amount. 
 - Add a thorough goal description. 

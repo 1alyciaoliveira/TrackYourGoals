@@ -78,19 +78,54 @@ Navigate towards creation of your new financial objective.
 - View Your Transaction Statistics 
 ![Statistics](./assets/images/statistic.png "Statistics")
 
-### Edit Goal
-
+## Future Development
+ - Let make real bank transactions through app.
+ - Erase Account. 
+ - Goal Fulfillment Congratulation Animation. 
+ - Link to goal wish page. 
 
 ## Build:
 - Undraw.co (SVG)
 - NPM modules
   - Nodemailer 
- - Bulma 
- - Sequelize 
- - MySQL
+  - Sequelize
+ - Bulma (CSS Styles)
+ - Handlebars (Template Engine)
+ - MySQL (Database)
+ - Javascript 
+ - HTML
+## MVC
+## Models
+- index.js
+- Objetctive.js
+- Recovery.js 
+- Transaction.js
+- User.js 
+- Verification.js
+## View
+### Layouts
+- main.handlebars  
+- Partials  
+    - objectivesitems.handlebars  
+    - transactionhistory.handlebars
+- confirmmail.handlebars
+- goal.handlebars
+- login.handlebars
+- password.handlebars
+- profile.handlebars
+- sendrecoverycode.handlebars
+- signup.handlebars
 
-## API:
-- Routes
+### Controller
+- homeRoutes.js
+- Index.js
+### API
+- index.js
+- objectiveRoutes.js 
+- recoveryRoutes.js 
+- transactionRoutes.js 
+- userRoutes.js 
+- verificationRoutes.js
 
 ## Challenges 
 - challenges you faced and features you hope to implement in the future. 
@@ -108,4 +143,3 @@ Jessica Sanchez
 Santiago Valenzuela  
 Rodrigo Roldan   
 Carlos Campos   
-## Licence 

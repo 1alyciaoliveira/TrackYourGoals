@@ -1,0 +1,19 @@
+:root {
+    --brandColor: hsl(166, 67%, 51%);
+    --background: #45BF78;
+    --textDark: hsla(0, 0%, 0%, 0.66);
+    --textLight: hsla(0, 0%, 0%, 0.33);
+  }
+
+body {
+    background: var(--background);
+    height: 100vh;
+    color: var(--textDark);
+  }
+
+  #imgreco {
+    background: rgba(255, 255, 255, .5);
+    margin-top: 3px;
+  }
+
+  @import 'bulma/css/bulma.css'

@@ -39,7 +39,7 @@ git clone https://github.com/1alyciaoliveira/TrackYourGoals.git
 #### Signing Up
 ![Signing_Up](./assets/images/signIn.png "Signing Up")
 - Add up email, username.
-- Create password at least 8 characters long.
+- Create password at least 8 characters long maximum 128.
 - Recieve almost instantly email confirmation and a secure key. 
 - Authorize profile creation by adding confirmation key on prompt.
 - Go back to log interface after acount creation.
@@ -49,12 +49,26 @@ git clone https://github.com/1alyciaoliveira/TrackYourGoals.git
 - Prompted to add your User Name and Secret Password. 
 
 #### ADD a New Goal
-- Navigate towards creation of your new financial objective. 
+![Add_New_Goal](./assets/images/addNewGoal.png "Goal")  
+
+- Navigate towards creation of your new financial objective.    
+
 - Add a goal title.  
 - Add a saving amount. 
 - Add a thorough goal description. 
 
-### Modify Goal
+### Goal Dashboard Viewer
+
+- Goal Transaction Menu  
+  - Add Money 
+  - Remove Money
+  - Edit Goal
+  - Delete Goal
+- Progress
+- History 
+- Statistics 
+
+### Edit Goal
 - Clic on goal title to modify.
 - Register the time preference and frequency of saving.
 - Withdrawal button, keep track of those financial moments where we have to change strategy and spend some of our savings for a good reason. Keep track of those expenditures.   

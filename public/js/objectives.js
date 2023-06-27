@@ -37,7 +37,12 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      const data = await response.json();
+      if (data.message ==='Cannot use negative number as target amount') {
+        openModal(`${data.message}`, 'danger');  
+      } else {        
+        document.location.replace('/profile');
+      }
     } else {
       // alert('Failed to create this objective');
       openModal('Failed to create this objective', 'danger');

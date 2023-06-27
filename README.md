@@ -37,14 +37,15 @@ git clone https://github.com/1alyciaoliveira/TrackYourGoals.git
 
 ## Usage: (sreenshots)
 #### Signing Up
-
+![Signing_Up](./assets/images/signIn.png "Signing Up")
 - Add up email, username.
 - Create password at least 8 characters long.
 - Recieve almost instantly email confirmation and a secure key. 
 - Authorize profile creation by adding confirmation key on prompt.
 - Go back to log interface after acount creation.
-**FALTA BOTON DE ALREADY HAVE AN ACCOUNT**
-#### Signing In
+
+#### Log In
+![Log_In](./assets/images/logIn.png "Loging In")
 - Prompted to add your User Name and Secret Password. 
 
 #### ADD a New Goal
@@ -54,6 +55,7 @@ git clone https://github.com/1alyciaoliveira/TrackYourGoals.git
 - Add a thorough goal description. 
 
 ### Modify Goal
+- Clic on goal title to modify.
 - Register the time preference and frequency of saving.
 - Withdrawal button, keep track of those financial moments where we have to change strategy and spend some of our savings for a good reason. Keep track of those expenditures.   
 

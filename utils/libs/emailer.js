@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const cred = require('../../email.json');
 require('dotenv').config();
 
 const transporter = nodemailer.createTransport({

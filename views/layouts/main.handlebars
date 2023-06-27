@@ -24,9 +24,7 @@
         <div class="navbar-item">
           <div class="buttons">
             {{#if logged_in}}
-            {{!-- <a href="/profile">profile</a>
-            {{else}}
-            --}}
+            <button class="button" class="button is-success" onclick="window.history.back();"><i class="fa-solid fa-rotate-left"></i></button>
             <button class="button" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
             {{/if}}
           </div>

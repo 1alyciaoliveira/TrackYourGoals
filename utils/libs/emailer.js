@@ -44,16 +44,16 @@ module.exports = {
             console.error(error);
         }
     },
-    SendNotification: async (email, body) => {
+    SendNotification: async (data) => {
         try {
             const info = await transporter.sendMail({
                 from: 'Finance Tracker Web <finance_super_tracker@outlook.com>',
-                to: email,
-                subject: 'Transaction Alert!!',
+                to: data.email,
+                subject: 'Transaction Notification!!',
                 text: 'Automatic mailer',
-                html: (body.isDeposit) ?
-                    `<p>You have added ${body.quantity} to your ${body.goal} goal</p>` :
-                    `<p>You have removed ${body.quantity} from your ${body.goal} goal</p>` ,
+                html: (data.quantity > 0) ?
+                    `<h2>New Transacion on your Objective!!!</h2><h3>You have added ${data.quantity} to your ${data.goal} goal</h3>` :
+                    `<h2>New Transacion on your Objective</h2><h3>You have removed ${Math.abs(data.quantity)} from your ${data.goal} goal</h3>` ,
             });
 
             console.log('Mensaje enviado:', info.messageId);

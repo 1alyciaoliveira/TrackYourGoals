@@ -16,7 +16,9 @@ const confirmation = async (event) => {
     if (response.ok) {
         document.location.replace(`password`);
     } else {
-        alert(response.message || 'Confirmation Failed');
+        // alert(response.message || 'Confirmation Failed');
+        openModal('Confirmation Failed', 'danger');
+
     }
 }
 

@@ -39,7 +39,8 @@ const newFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to create this objective');
+      // alert('Failed to create this objective');
+      openModal('Failed to create this objective', 'danger');
     }
   }
 };
@@ -57,10 +58,12 @@ const delButtonHandler = async (event) => {
     const data = await response.json();
 
     if (response.ok) {
-      alert('Objective deleted');
+      // alert('Objective deleted');
+      openModal('Objective deleted', 'success');
       document.location.replace('/profile');
     } else {
-      alert(data.message || 'Failed to delete objective');
+      // alert(data.message || 'Failed to delete objective');
+      openModal('Failed to delete objective', 'danger');
     }
   }
 };

@@ -6,15 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A p p N a m e .</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/modal.css">
+
 </head>
 
 <body>
-    <header>
+  <header>
 
     <nav class="navbar is-flex" style="background-color: rgba(255, 255, 255, 0);">
       <div class="navbar-brand">
         <a class="navbar-item" href="/profile">
-          A p p N a m e . 
+          A p p N a m e .
         </a>
       </div>
 
@@ -22,24 +24,34 @@
         <div class="navbar-item">
           <div class="buttons">
             {{#if logged_in}}
-            {{!-- <a href="/profile">profile</a> 
+            {{!-- <a href="/profile">profile</a>
             {{else}}
             --}}
-              <button class="button" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+            <button class="button" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
             {{/if}}
           </div>
         </div>
       </div>
     </nav>
 
-    </header>
-    <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
+  </header>
+  <div id="alertModal" class="modal">
+    <div class="modal-content">
+      <div class="box">
+        <p id="alertContent"></p>
+      </div>
+    </div>
+    <button id="closeAlert" class="modal-close is-large" aria-label="close"></button>
+  </div>
+  <script src="/js/modal.js"></script>
+
+  <main class="container container-fluid mt-5">
+    <!-- Render the sub layout -->
+    {{{ body }}}
+  </main>
+  <footer>
+
+  </footer>
   </div>
 
   <!-- Render script for logged in users only -->
@@ -47,8 +59,11 @@
   <script src="/js/logout.js"></script>
   {{/if}}
 
-<script src="https://kit.fontawesome.com/51d0cae634.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://kit.fontawesome.com/51d0cae634.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
-

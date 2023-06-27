@@ -18,7 +18,9 @@ const loginFormHandler = async (event) => {
         const data = await response.json();
 
         if (data.message === 'Your Email is not verified') {
-          alert('Your Email is not verified\nA Verification Code has been sent to your email');
+          // alert('Your Email is not verified\nA Verification Code has been sent to your email');
+          openModal('Your Email is not verified\nA Verification Code has been sent to your email', 'info');
+          setTimeout(()=>{}, 3000);
           document.location.replace('/confirmation');
         } else {
           document.location.replace('/profile');
@@ -26,7 +28,8 @@ const loginFormHandler = async (event) => {
         
       } else {
         const errorData = await response.json();
-        alert(errorData.message); 
+        // alert(errorData.message); 
+        openModal(`${errorData.message}`, 'danger');
       }
     }
   };  

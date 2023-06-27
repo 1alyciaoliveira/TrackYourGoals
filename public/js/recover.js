@@ -18,11 +18,14 @@ const confirmation = async (event) => {
         if (response.ok) {
             document.location.replace(`login`);
         } else {
-            alert(response.message || 'Confirmation Failed');
+            // alert(response.message || 'Confirmation Failed');
+            openModal('Confirmation Failed', 'danger');
         }
 
     } else {
-        alert(response.message || 'Password do not match');
+        // alert(response.message || 'Password do not match');
+        openModal('Password do not match', 'danger');
+
     }
 }
 

@@ -7,7 +7,9 @@ const logout = async () => {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      // alert(response.statusText);
+      openModal(`${response.statusText}`, 'danger');
+
     }
   };
   

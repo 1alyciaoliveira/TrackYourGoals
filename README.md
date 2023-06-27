@@ -13,7 +13,7 @@
 1. [Project Description](#tyg) 
 2. [Installation](#installation)
 3. [Usage](#usage)
-4. [Build With](#build)
+4. [Build](#build)
 5. [Api Reference](#api)
 6. [Team Challenges](#challenges)
 7. [Features](#features)
@@ -22,13 +22,22 @@
 10. [Licence](#licence)
 ## Installation:
 Github  
-```https://github.com/1alyciaoliveira/TrackYourGoals.git ```  
+```md 
+https://github.com/1alyciaoliveira/TrackYourGoals.git
+```
+
 Heroku  
-```https://track-your-goals-180d59665ffa.herokuapp.com/login```  
+``` md 
+https://track-your-goals-180d59665ffa.herokuapp.com/login
+```  
 Local  
-```git clone https://github.com/1alyciaoliveira/TrackYourGoals.git ``` 
+``` md 
+git clone https://github.com/1alyciaoliveira/TrackYourGoals.git
+```
+
 ## Usage: (sreenshots)
 #### Signing Up
+
 - Add up email, username.
 - Create password at least 8 characters long.
 - Recieve almost instantly email confirmation and a secure key. 

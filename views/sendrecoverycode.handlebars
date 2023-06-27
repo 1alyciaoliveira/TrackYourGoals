@@ -1,17 +1,27 @@
 <link rel="stylesheet" href="/css/recovery.css">
 
-<div class="hero is-fullheight">
-    <div class="hero-body is-justify-content-center is-align-items-center">
-            <div id="confirmation-form">
-            <div class="column">
-                <h1 class="title colored has-text-centered">We all forget things, don't worry!</h1>
-                  <div class="img" id="imgreco">
-                <object data="./img/forgot.svg" width="300px"></object></div>
-                <label for="send-mail" class="has-text-weight-bold">Introduce Email to send recovery code:</label>
-                <input id="email" class="input is-primary" type="email" placeholder="Email">
-            </div>
-            <div class="column">
-                <button id="confirm" class="button is-primary is-fullwidth has-text-weight-bold" type="submit">Enter</button>
+<div class="container">
+    <div class="columns is-multiline">
+        <div class="column is-8 is-offset-2 register">
+            <div class="columns">
+                <div class="column left is-flex-direction-column" id="left-recovery">
+                    <h1 class="title colored is-4">We all forget things,</h1>
+                    <p class="subtitle">don't worry!</p>
+                    <div class="img">
+                        <object data="./img/forgot.svg" width="300px"></object>
+                    </div>
+                </div>
+
+                <div class="column right is-flex" id="right-recovery">
+                    <form class="is-flex is-flex-direction-column is-justify-content-center" style="gap: 10px;">
+                        <div class="control is-flex is-flex-direction-column is-justify-content-center" style="gap: 10px;">   
+                            <label for="send-mail">Introduce Email to send recovery code:</label>
+                            <input id="email" class="input is-primary" type="email" placeholder="Email">
+                        </div>
+
+                        <button id="confirm" class="button is-primary is-fullwidth" type="submit">Enter</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

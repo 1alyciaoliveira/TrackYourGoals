@@ -52,7 +52,7 @@ git clone https://github.com/1alyciaoliveira/TrackYourGoals.git
 ![Add_New_Goal](./assets/images/addNewGoal.png "Goal")  
 
 - Navigate towards creation of your new financial objective.    
-
+![Add_New_Goal](./assets/images/clicModify_Goal.png"goal_configuration")
 - Add a goal title.  
 - Add a saving amount. 
 - Add a thorough goal description. 

@@ -1,3 +1,6 @@
+#alertModal{
+    z-index: 42;
+}
 #alertModal.modal.is-danger .box {
     background-color: #f14668;
     color: white;

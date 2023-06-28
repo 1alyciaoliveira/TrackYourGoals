@@ -445,10 +445,11 @@ module.exports = Verification;
 </body>
 
 </html>
-
-
 ``` 
+
+
 - Partials  
+
     - objectivesitems.handlebars    
     ``` html 
     <div class="column is-three-fifths is-offset-one-fifth">
@@ -467,8 +468,10 @@ module.exports = Verification;
         </div>
         <button class="button is-danger is-small" data-id="{{id}}">Delete</button></td>
     </div>
-</div>
-```
+    </div>
+    ``` 
+
+
 <!-- -transactionhistory.handlebars
 
 - confirmmail.handlebars
@@ -477,8 +480,8 @@ module.exports = Verification;
 - password.handlebars
 - profile.handlebars
 - sendrecoverycode.handlebars
-- signup.handlebars
- -->
+- signup.handlebars -->
+ 
 ## **Controller**
 - homeRoutes.js
 - Index.js

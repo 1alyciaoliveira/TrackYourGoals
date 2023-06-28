@@ -228,14 +228,250 @@ module.exports = Recovery;
 ```
 
 - Transaction.js
+```js
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
+
+class Transaction extends Model { }
+
+Transaction.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'user',
+                key: 'id',
+            },
+        },
+        objective_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'objective',
+                key: 'id',
+            },
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull:true // changed to true so it can accept negative values
+        },
+        description: {
+            type: DataTypes.STRING,
+        },
+        date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        }     
+    },
+    {
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'transaction',
+    }
+)
+
+module.exports = Transaction;
+
+```
 - User.js 
+``` js
+const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
+
+class User extends Model {
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password);
+    }
+}
+User.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true,
+            },
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [8],
+            },
+        },
+        isVerified: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+    },
+    {
+        hooks: {
+            beforeCreate: async (newUserData) => {
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
+                return newUserData;
+            },
+            beforeUpdate: async (updatedUserData) => {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                return updatedUserData;
+            },
+        },
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'user',
+    }
+);
+
+module.exports = User;
+
+```
+
 - Verification.js
+``` js
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
+
+class Verification extends Model {}
+
+Verification.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true,
+            },
+        },
+        code: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        }
+    },
+    {       
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'verification',
+    }
+);
+
+module.exports = Verification;
+
+```
 ## **View**
 ### Layouts
-- main.handlebars  
+- main.handlebars 
+``` html 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A p p N a m e .</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+
+<body>
+    <header>
+
+    <nav class="navbar is-flex" style="background-color: rgba(255, 255, 255, 0);">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/profile">
+          A p p N a m e . 
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            {{#if logged_in}}
+            {{!-- <a href="/profile">profile</a> 
+            {{else}}
+            --}}
+              <button class="button" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    </header>
+    <main class="container container-fluid mt-5">
+      <!-- Render the sub layout -->
+      {{{ body }}}
+    </main>
+    <footer>
+      
+    </footer>
+  </div>
+
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+
+<script src="https://kit.fontawesome.com/51d0cae634.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+``` 
 - Partials  
-    - objectivesitems.handlebars  
-    - transactionhistory.handlebars
+    - objectivesitems.handlebars    
+    ``` html 
+    <div class="column is-three-fifths is-offset-one-fifth">
+    <div class="box" id="goal-boxes">
+        <div class="title is-5">
+            <a href="/goal/{{id}}">{{name}}</a>
+        </div>
+        <div class="subtitle is-6">
+            {{description}}
+        </div>
+        <div class="progress-bar">
+            <progress class="progress is-primary" value="{{progress}}" max="100">{{progress}}%</progress> 
+        </div>
+        <div class="subtitle is-6">
+           <p>Your target is ${{format_amount target_quantity}}</p>
+        </div>
+        <button class="button is-danger is-small" data-id="{{id}}">Delete</button></td>
+    </div>
+</div>
+
+```
+  - transactionhistory.handlebars
+
 - confirmmail.handlebars
 - goal.handlebars
 - login.handlebars

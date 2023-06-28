@@ -16,10 +16,10 @@
   <div class="column is-three-fifths is-offset-one-fifth">
     <div class="box">
       <h2 class="title">Progress</h2>
-      <p>You have saved ${{progress}} from your ${{target_quantity}} goal.</p>
+      <p>You have saved ${{format_amount progress}} from your ${{format_amount target_quantity}} goal.</p>
       <div>
         <canvas id="pieChart"> </canvas>
-      </div> 
+      </div>
     </div>
   </div>
 
@@ -52,11 +52,6 @@
     </div>
   </div>
 
-  <div class="columns is-multiline is-mobile is-justify-content-center">
-    <div class="column is-three-fifths is-flex is-flex-direction-column is-align-items-center">
-      <button class="button" class="button is-success"><a href="/profile">Back</a></button>
-    </div>
-  </div>
 </div>
 
 
@@ -148,8 +143,9 @@
           <label class="label">How much are you using?</label>
           <div class="control">
             <input id="remove-quantity" class="input" type="text" placeholder="">
+          </div>
         </div>
-      
+
         <div class="field mr-3 ml-3">
           <label class="label">Description</label>
           <div class="control">

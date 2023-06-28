@@ -18,18 +18,25 @@ const signupFormHandler = async (event) => {
           if (response.ok) {
             const data = await response.json();
             if (data.message === 'Email already in use.') {
-              alert('This email already exists');
+              // alert('This email already exists');
+              openModal('This email already exists', 'danger');
+
             } else {
               document.location.replace('/confirmation');
             }
           } else {
-            alert(response.statusText);
+            // alert(response.statusText);
+            openModal(`${response.statusText}`, 'danger');
+
           }
         } else {
-          alert('Passwords do not match');
+          // alert('Passwords do not match');
+          openModal('Passwords do not match', 'danger');
+
         }
       } else {
-        alert('Password must have more than 8 characters');
+        // alert('Password must have more than 8 characters');
+        openModal('Password must have more than 8 characters', 'danger');
       }
     }
   };

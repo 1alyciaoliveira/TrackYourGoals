@@ -70,10 +70,17 @@ const editHandler = async (event) => {
     });
 
     if (response.ok) {
-      alert('Objective updated');
-      document.location.replace(`/goal/${id}`);
+      // alert('Objective updated');
+      const data = await response.json();
+      if (data.message ==='Cannot use negative number as target amount') {
+        openModal(`${data.message}`, 'danger');  
+      } else {        
+        openModal('Objective updated', 'success');
+        document.location.replace(`/goal/${id}`);
+      }
     } else {
-      alert(data.message || 'Failed to edit objective');
+      // alert(data.message || 'Failed to edit objective');
+      openModal('Failed to edit objective', 'danger');
     }
   }
 };
@@ -89,7 +96,8 @@ const addMoneyHandler = async (event) => {
 
     // Conditional to manage empty input from here (can be also solved from Models)
     if (quantity === '') {
-      alert('Please enter a value');
+      // alert('Please enter a value');
+      openModal('Please enter a value', 'info');
       return;
     }
 
@@ -113,10 +121,12 @@ const addMoneyHandler = async (event) => {
 
 
   if (response.ok) {
-    alert('Money added');
+    // alert('Money added');
+    openModal('Money added', 'success');
     document.location.replace(`/goal/${id}`);
   } else {
-    alert(response.message || 'Failed to add money');
+    // alert(response.message || 'Failed to add money');
+    openModal('Failed to add money', 'danger');
   }
 }
 
@@ -133,7 +143,8 @@ const removeMoneyHandler = async (event) => {
 
   // Conditional to manage empty input from here (can be also solved from Models)
   if (removeQuantity.value.trim() === '') {
-    alert('Please enter a value');
+    // alert('Please enter a value');
+    openModal('Please enter a value', 'info');
     return;
   }
 
@@ -159,10 +170,17 @@ const removeMoneyHandler = async (event) => {
 
 
   if (response.ok) {
-    alert('Money removed');
-    document.location.replace(`/goal/${id}`);
+    // alert('Money removed');
+    const data = await response.json();
+      if (data.message ==='Cannot remove more than the remaining amount') {
+        openModal(`${data.message}`, 'danger');  
+      } else {                
+        openModal('Money removed', 'success');
+        document.location.replace(`/goal/${id}`);
+      }
   } else {
-    alert(response.message || 'Failed to remove money');
+    // alert(response.message || 'Failed to remove money');
+    openModal('Failed to remove money', 'danger');
   }
 }
 
@@ -185,11 +203,13 @@ const delButtonHandler = async (event) => {
 
 
   if (response.ok) {
-    alert('Objective deleted');
+    // alert('Objective deleted');
+    openModal('Objective deleted', 'success');
     document.location.replace('/profile');
   } else {
     const data = await response.json();
-    alert(data.message || 'Failed to delete objective');
+    // alert(data.message || 'Failed to delete objective');
+    openModal('Failed to delete objective', 'danger');
   }
 };
 

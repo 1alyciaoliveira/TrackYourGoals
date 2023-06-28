@@ -95,14 +95,47 @@ Navigate towards creation of your new financial objective.
  - Javascript 
  - HTML
 ## MVC
-## Models
-- index.js
+## **Models**
+index.js  
+```js
+const User = require('./User');
+const Transaction = require('./Transaction');
+const Objective = require('./Objective');
+const Verification = require('./Verification');
+const Recovery = require('./Recovery');
+
+
+User.hasMany(Objective, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+
+Objective.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+
+User.hasMany(Transaction, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+
+Objective.hasMany(Transaction, {
+    foreignKey: 'objective_id',
+    onDelete: 'CASCADE'
+});
+
+Transaction.belongsTo(Objective, {
+    foreignKey:'objective_id'
+});
+
+module.exports = { User, Transaction, Objective, Verification , Recovery};
+```
 - Objetctive.js
 - Recovery.js 
 - Transaction.js
 - User.js 
 - Verification.js
-## View
+## **View**
 ### Layouts
 - main.handlebars  
 - Partials  
@@ -116,7 +149,7 @@ Navigate towards creation of your new financial objective.
 - sendrecoverycode.handlebars
 - signup.handlebars
 
-### Controller
+## **Controller**
 - homeRoutes.js
 - Index.js
 ### API
@@ -128,15 +161,13 @@ Navigate towards creation of your new financial objective.
 - verificationRoutes.js
 
 ## Challenges 
-- challenges you faced and features you hope to implement in the future. 
+- We faced the huge challenge to make a full stack application deployment from scratch in just about week and half. 
+- We faced the challenge of not being all at the same knowlege and experience level. 
+
 
 ## Features 
  - what makes our project stand out
 
-## Code
-- example 01
-
-## Contribute (contributing guideline)
 ## Credits 
 Alycia Olyveria  
 Jessica Sanchez  

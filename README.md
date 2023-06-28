@@ -468,9 +468,8 @@ module.exports = Verification;
         <button class="button is-danger is-small" data-id="{{id}}">Delete</button></td>
     </div>
 </div>
-
 ```
-  - transactionhistory.handlebars
+-transactionhistory.handlebars
 
 - confirmmail.handlebars
 - goal.handlebars

@@ -469,7 +469,7 @@ module.exports = Verification;
     </div>
 </div>
 ```
--transactionhistory.handlebars
+<!-- -transactionhistory.handlebars
 
 - confirmmail.handlebars
 - goal.handlebars
@@ -478,7 +478,7 @@ module.exports = Verification;
 - profile.handlebars
 - sendrecoverycode.handlebars
 - signup.handlebars
-
+ -->
 ## **Controller**
 - homeRoutes.js
 - Index.js
